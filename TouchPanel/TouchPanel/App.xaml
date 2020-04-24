@@ -1,0 +1,24 @@
+﻿<?xml version="1.0" encoding="utf-8" ?>
+<Application xmlns="http://xamarin.com/schemas/2014/forms"
+             xmlns:x="http://schemas.microsoft.com/winfx/2009/xaml"
+             xmlns:d="http://xamarin.com/schemas/2014/forms/design"
+             xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
+             mc:Ignorable="d"                
+             x:Class="TouchPanel.App">
+    <Application.Resources>
+       
+        <ResourceDictionary>
+            <OnPlatform x:TypeArguments="x:String" x:Key="BrownStandart">
+
+                <On Platform="Android" Value="BrownStd-Light.otf#BrownStd Light"/>
+            </OnPlatform>
+            <OnPlatform x:TypeArguments="x:String" x:Key="BrownStandartThin">
+
+                <On Platform="Android" Value="BrownStd-Thin.otf#BrownStd Thin"/>
+            </OnPlatform>
+            <Style TargetType="Label">
+                <Setter Property="FontFamily" Value="{StaticResource BrownStandart}" />
+            </Style>
+        </ResourceDictionary>
+    </Application.Resources>
+</Application>

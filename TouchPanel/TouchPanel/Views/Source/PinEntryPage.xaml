@@ -1,0 +1,60 @@
+﻿<?xml version="1.0" encoding="utf-8" ?>
+<ContentView xmlns="http://xamarin.com/schemas/2014/forms"
+             xmlns:x="http://schemas.microsoft.com/winfx/2009/xaml"
+             xmlns:d="http://xamarin.com/schemas/2014/forms/design"
+             xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
+             mc:Ignorable="d"                          
+             NavigationPage.HasNavigationBar="false"
+              xmlns:controls="clr-namespace:TouchPanel.CustomControls;assembly=TouchPanel" 
+             xmlns:shared="clr-namespace:TouchPanel.Views"
+             x:Class="TouchPanel.Views.Source.PinEntryPage">
+    <ContentView.Content>
+        <StackLayout>
+            
+
+            <Grid Margin="20,20,20,0" HorizontalOptions="CenterAndExpand" VerticalOptions="CenterAndExpand">
+                <Grid.ColumnDefinitions>
+                    <ColumnDefinition Width="110" />
+                    <ColumnDefinition Width="110" />
+                    <ColumnDefinition Width="110" />
+                </Grid.ColumnDefinitions>
+                <Grid.RowDefinitions>
+                    <RowDefinition Height="110" />
+                    <RowDefinition Height="110" />
+                    <RowDefinition Height="110" />
+                    <RowDefinition Height="110" />
+                    <RowDefinition Height="110" />
+                </Grid.RowDefinitions>
+
+
+                <CollectionView  ItemsSource="{Binding PinNumbers}" Grid.ColumnSpan="3"
+                ItemsLayout="HorizontalList" HorizontalOptions="CenterAndExpand">
+                    <CollectionView.ItemTemplate>
+                        <DataTemplate>
+                            <StackLayout Orientation="Horizontal">
+                                <controls:BorderedFrame Margin="10,10" HorizontalOptions="StartAndExpand" CornerRadius="1"
+                                                        WidthRequest="25" BackgroundColor="Transparent" BorderColor="White">
+                                    <Label VerticalOptions="CenterAndExpand" HorizontalOptions="CenterAndExpand" FontSize="28" TextColor="White" Text="{Binding .}"></Label>
+                                </controls:BorderedFrame>
+                            </StackLayout>
+
+
+                        </DataTemplate>
+                    </CollectionView.ItemTemplate>
+                </CollectionView>
+                <Button  FontSize="40" BorderColor="White" BorderWidth="1" TextColor="White"  CornerRadius="100" Margin="10" BackgroundColor="Transparent" Text="1" Grid.Row="1" Grid.Column="0" Command="{Binding AddNumberToPinCommand}" CommandParameter="1"></Button>
+                <Button  FontSize="40" BorderColor="White" BorderWidth="1" TextColor="White"  CornerRadius="100" Margin="10" BackgroundColor="Transparent" Text="2" Grid.Row="1" Grid.Column="1" Command="{Binding AddNumberToPinCommand}" CommandParameter="2"></Button>
+                <Button  FontSize="40" BorderColor="White" BorderWidth="1" TextColor="White"  CornerRadius="100" Margin="10" BackgroundColor="Transparent" Text="3" Grid.Row="1" Grid.Column="2" Command="{Binding AddNumberToPinCommand}" CommandParameter="3"></Button>
+                <Button  FontSize="40" BorderColor="White" BorderWidth="1" TextColor="White"  CornerRadius="100" Margin="10" BackgroundColor="Transparent" Text="4" Grid.Row="2" Grid.Column="0" Command="{Binding AddNumberToPinCommand}" CommandParameter="4"></Button>
+                <Button  FontSize="40" BorderColor="White" BorderWidth="1" TextColor="White"  CornerRadius="100" Margin="10" BackgroundColor="Transparent" Text="5" Grid.Row="2" Grid.Column="1" Command="{Binding AddNumberToPinCommand}" CommandParameter="5"></Button>
+                <Button  FontSize="40" BorderColor="White" BorderWidth="1" TextColor="White"  CornerRadius="100" Margin="10" BackgroundColor="Transparent" Text="6" Grid.Row="2" Grid.Column="2" Command="{Binding AddNumberToPinCommand}" CommandParameter="6"></Button>
+                <Button  FontSize="40" BorderColor="White" BorderWidth="1" TextColor="White"  CornerRadius="100" Margin="10" BackgroundColor="Transparent" Text="7" Grid.Row="3" Grid.Column="0" Command="{Binding AddNumberToPinCommand}" CommandParameter="7"></Button>
+                <Button  FontSize="40" BorderColor="White" BorderWidth="1" TextColor="White"  CornerRadius="100" Margin="10" BackgroundColor="Transparent" Text="8" Grid.Row="3" Grid.Column="1" Command="{Binding AddNumberToPinCommand}" CommandParameter="8"></Button>
+                <Button FontSize="40" BorderColor="White" BorderWidth="1" TextColor="White"  CornerRadius="100" Margin="10" BackgroundColor="Transparent" Text="9" Grid.Row="3" Grid.Column="2" Command="{Binding AddNumberToPinCommand}" CommandParameter="9"></Button>
+                <Button FontSize="18"  CornerRadius="100" Margin="10" BackgroundColor="#bdd2df" Text="Back" Grid.Row="4" Grid.Column="0" Command="{Binding BackCommand}"></Button>
+                <Button  FontSize="40" BorderColor="White" BorderWidth="1" TextColor="White"  CornerRadius="100" Margin="10" BackgroundColor="Transparent" Text="0" Grid.Row="4" Grid.Column="1" Command="{Binding AddNumberToPinCommand}" CommandParameter="0"></Button>
+                <Button FontSize="18" CornerRadius="100" Margin="10" BackgroundColor="#bdd2df" Text="Clear" Grid.Row="4" Grid.Column="2" Command="{Binding ClearCommand}"></Button>
+            </Grid>
+        </StackLayout>
+    </ContentView.Content>
+</ContentView>

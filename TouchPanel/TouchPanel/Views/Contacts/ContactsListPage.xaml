@@ -1,0 +1,142 @@
+﻿<?xml version="1.0" encoding="utf-8" ?>
+<ContentView xmlns="http://xamarin.com/schemas/2014/forms"
+             xmlns:x="http://schemas.microsoft.com/winfx/2009/xaml"
+             xmlns:d="http://xamarin.com/schemas/2014/forms/design"
+             xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
+             mc:Ignorable="d"             
+             NavigationPage.HasNavigationBar="false"
+             xmlns:local="clr-namespace:TouchPanel.Helpers.Converters"
+             xmlns:svg="clr-namespace:XamaRed.Forms.Svg;assembly=XamaRed.Forms.Svg"
+             xmlns:controls="clr-namespace:TouchPanel.CustomControls;assembly=TouchPanel" 
+             x:Class="TouchPanel.Views.Contacts.ContactsListPage"
+             x:Name="ContentView">
+    <ContentView.Resources>
+        <local:BooleanToFrameBorderColor x:Key="BooleanToFrameBorderColor"/>
+        <local:InverseBoolConverter x:Key="InverseBoolConverter"/>
+        <local:ContactTypeToVisibleModifyButtons x:Key="ContactTypeToVisibleModifyButtons"/>
+    </ContentView.Resources>
+    <ContentView.Content>
+        <AbsoluteLayout>
+            <Grid Margin="0,40">
+                <Grid.ColumnDefinitions>
+                    <ColumnDefinition  Width="5*" />
+                    <ColumnDefinition Width="*" />
+                </Grid.ColumnDefinitions>
+                <Grid.RowDefinitions>
+                    <RowDefinition Height="*" />
+                    <RowDefinition Height="5*" />
+                    <RowDefinition Height="*" />
+                </Grid.RowDefinitions>
+
+                <controls:BorderedFrame BackgroundColor="Transparent" HasShadow="True" CornerRadius="3"
+                   Margin="100,0,0,0" Grid.Column="0" Grid.Row="0" BorderColor="WhiteSmoke"
+                   Padding="10">
+                    <Grid>
+                        <Grid.ColumnDefinitions>
+                            <ColumnDefinition  Width="*" />
+                            <ColumnDefinition Width="13*" />
+                        </Grid.ColumnDefinitions>
+                        <Grid.RowDefinitions>
+                            <RowDefinition Height="*" />
+                        </Grid.RowDefinitions>
+                        <svg:SvgView Grid.Column="0" Grid.Row="0" ResourceId="TouchPanel.Icons.search.svg" />
+                        <controls:SearchContactEntry Text="{Binding SearchContactText}" 
+                         FontSize="26" Grid.Column="1" Grid.Row="0" 
+                         Placeholder="Search contacts"  
+                         Keyboard="Email"
+                         >
+
+                        </controls:SearchContactEntry>
+                    </Grid>
+                </controls:BorderedFrame>
+                <!--<Frame BackgroundColor="Transparent" HasShadow="True" CornerRadius="5" >-->
+                <controls:BorderedFrame  CornerRadius="5" Margin="100,0,0,0" Grid.Row="1" OutlineColor="White" BorderColor="WhiteSmoke">
+                    <ListView SelectionMode="Single"  HasUnevenRows="True" SeparatorVisibility="None" ItemsSource="{Binding FilteredContacts}">
+                        <ListView.ItemTemplate>
+                            <DataTemplate>
+                                <ViewCell >
+                                    <controls:BorderedFrame  Margin="1" BackgroundColor="Transparent"  x:Name="Frame1"
+                                           BorderColor="{Binding IsSelected,Converter={StaticResource BooleanToFrameBorderColor}}" 
+                                           HasShadow="True" CornerRadius="5" Padding="-1.5">
+                                        <controls:BorderedFrame.GestureRecognizers>
+                                            <TapGestureRecognizer NumberOfTapsRequired="1" Tapped="TapGestureRecognizer_Tapped"
+                                                  Command="{Binding BindingContext.SelectContactCommand, Source={x:Reference ContentView}}"
+                                                   CommandParameter="{Binding .}"
+>
+                                            </TapGestureRecognizer>
+                                        </controls:BorderedFrame.GestureRecognizers>
+                                        <Grid Margin="0,10,0,10">
+                                            <Grid.ColumnDefinitions>
+                                                <ColumnDefinition  Width="*" />
+                                                <ColumnDefinition Width="9*" />
+                                                <ColumnDefinition  Width="*" />
+                                            </Grid.ColumnDefinitions>
+                                            <Grid.RowDefinitions>
+                                                <RowDefinition Height="30" />
+                                            </Grid.RowDefinitions>
+                                            <svg:SvgView Grid.Column="0" HorizontalAligment="Middle"  ResourceId="TouchPanel.Icons.user_white.svg" />
+
+                                            <Label VerticalOptions="EndAndExpand" Grid.Column="1" HorizontalTextAlignment="Start" FontSize="26" TextColor="White" Text="{Binding ContactName}"></Label>
+                                            <Grid Grid.Column="2" IsVisible="{Binding IsMenuClicked, Converter={StaticResource InverseBoolConverter}}">
+                                                <Grid.GestureRecognizers>
+                                                    <TapGestureRecognizer NumberOfTapsRequired="1" 
+                                                          Command="{Binding BindingContext.AdvancedButtonClickCommand, Source={x:Reference ContentView}}"
+                                                          CommandParameter="{Binding .}">
+                                                    </TapGestureRecognizer>
+                                                </Grid.GestureRecognizers>
+                                                <svg:SvgView  HorizontalAligment="Middle" ResourceId="TouchPanel.Icons.ellipsis_v.svg" />
+                                            </Grid>
+                                            <controls:BorderedFrame IsVisible="{Binding IsMenuClicked}" BackgroundColor="White" Padding="1"
+                                                         Grid.ColumnSpan="3" CornerRadius="5" Margin="0,-8,0,-8" HorizontalOptions="EndAndExpand">
+                                            <StackLayout Orientation="Horizontal" HorizontalOptions="EndAndExpand">
+                                                    <StackLayout Orientation="Horizontal" Margin="0,0,0,0" Padding="8,0,20,0">
+                                                    <StackLayout.GestureRecognizers>
+                                                        <TapGestureRecognizer NumberOfTapsRequired="1" 
+                                                          Command="{Binding BindingContext.StartCallCommand, Source={x:Reference ContentView}}"
+                                                          CommandParameter="{Binding .}">
+                                                        </TapGestureRecognizer>
+                                                    </StackLayout.GestureRecognizers>
+                                                    <svg:SvgView Margin="0,10,0,10" HorizontalAligment="Middle" ResourceId="TouchPanel.Icons.phone.svg" />
+                                                        <Label Text="Call" FontSize="18" Margin="-6,12,0,0"></Label>
+                                                </StackLayout>
+                                                    <StackLayout  Orientation="Horizontal" Padding="8,0,25,0" IsVisible="{Binding Type, Converter={StaticResource ContactTypeToVisibleModifyButtons}}">
+                                                    <StackLayout.GestureRecognizers>
+                                                        <TapGestureRecognizer NumberOfTapsRequired="1" 
+                                                          Command="{Binding BindingContext.OpenEditUserPageCommand, Source={x:Reference ContentView}}"
+                                                          CommandParameter="{Binding .}">
+                                                        </TapGestureRecognizer>
+                                                    </StackLayout.GestureRecognizers>
+                                                    <svg:SvgView Margin="0,10,0,10" HorizontalAligment="Middle" ResourceId="TouchPanel.Icons.edit.svg" />
+                                                        <Label Text="Edit" Margin="-6,12,0,0" FontSize="18"></Label>
+                                                </StackLayout>
+                                                    <StackLayout  Orientation="Horizontal" Padding="0,0,8,0" IsVisible="{Binding Type, Converter={StaticResource ContactTypeToVisibleModifyButtons}}">
+                                                    <StackLayout.GestureRecognizers>
+                                                        <TapGestureRecognizer NumberOfTapsRequired="1"
+                                                          Command="{Binding BindingContext.DeleteUserCommand, Source={x:Reference ContentView}}"
+                                                          CommandParameter="{Binding .}">
+                                                        </TapGestureRecognizer>
+                                                    </StackLayout.GestureRecognizers>
+                                                        <svg:SvgView Margin="0,10,0,10" HorizontalAligment="Middle" ResourceId="TouchPanel.Icons.trash_alt.svg" />
+                                                        <Label Text="Delete" Margin="-6,12,7,0" FontSize="18"></Label>
+                                                </StackLayout>
+                                            </StackLayout>
+                                            </controls:BorderedFrame>
+                                        </Grid>
+
+                                    </controls:BorderedFrame>
+                                </ViewCell>
+
+                            </DataTemplate>
+                        </ListView.ItemTemplate>
+                    </ListView>
+                    </controls:BorderedFrame>
+                <!--</Frame>-->
+
+                <Button Grid.Column="1" Padding="0,0,0,8" Text="+" BorderColor="White" FontSize="50" TextColor="White"
+                        BackgroundColor="Transparent" Margin="67,0,67,0" CornerRadius="100" 
+                        BorderWidth="2" Command="{Binding OpenCreateUserPageCommand}"></Button>
+                <Label Grid.Column="1" Margin="55,0,0,0" Grid.Row="1" FontSize="22" TextColor="White" Text="Add new"></Label>
+            </Grid>
+        </AbsoluteLayout>
+    </ContentView.Content>
+</ContentView>

@@ -1,0 +1,153 @@
+﻿<?xml version="1.0" encoding="UTF-8"?>
+<ContentView xmlns="http://xamarin.com/schemas/2014/forms" 
+             xmlns:x="http://schemas.microsoft.com/winfx/2009/xaml"
+             xmlns:d="http://xamarin.com/schemas/2014/forms/design"
+             xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
+             mc:Ignorable="d"
+              xmlns:local="clr-namespace:TouchPanel.Helpers.Converters"
+            xmlns:svg="clr-namespace:XamaRed.Forms.Svg;assembly=XamaRed.Forms.Svg"
+             x:Class="TouchPanel.Views.Source.PresetListView"
+             x:Name="RootPresetView">
+
+    <ContentView.Resources>
+        <local:BooleanToMarginSidemenuConverter x:Key="BooleanToMarginSidemenuConverter"/>
+        <local:BooleanToMarginSidemenuButtonConverter x:Key="BooleanToMarginSidemenuButtonConverter"/>
+        <local:InverseBoolConverter x:Key="InverseBoolConverter"/>
+
+        <local:BooleanToMarginEditPresetConverter x:Key="BooleanToMarginEditPresetConverter"/>
+        <local:BooleanToMarginBackgroundPresetConverter x:Key="BooleanToMarginBackgroundPresetConverter"/>
+        <Style TargetType="Button" Class="BlueButton">
+            <Setter Property="BackgroundColor"
+                    Value="DodgerBlue" />
+            <Setter Property="TextColor"
+                    Value="WhiteSmoke" />
+            <Setter Property="BorderWidth"
+                    Value="1" />
+            <Setter Property="BorderColor"
+                    Value="LightGray" />
+        </Style>
+        <Style TargetType="Button" Class="RedButton">
+            <Setter Property="BackgroundColor"
+                    Value="#E55E40" />
+            <Setter Property="TextColor"
+                    Value="WhiteSmoke" />
+            <Setter Property="BorderWidth"
+                    Value="1" />
+            <Setter Property="BorderColor"
+                    Value="LightGray" />
+        </Style>
+    </ContentView.Resources>
+    <ContentView.Content HorizontalOptions="End" >
+        <AbsoluteLayout >
+            <StackLayout Orientation="Horizontal" AbsoluteLayout.LayoutBounds="1,.15, 70, 80"
+                AbsoluteLayout.LayoutFlags="PositionProportional" >
+                <Frame CornerRadius="10" BackgroundColor="#1A6B9E" >
+                    <Frame.GestureRecognizers>
+                        <TapGestureRecognizer NumberOfTapsRequired="1"
+                            Command="{Binding ToggleSideMenuCommand}">
+                        </TapGestureRecognizer>
+                    </Frame.GestureRecognizers>
+                    <svg:SvgView ResourceId="TouchPanel.Icons.sliders_h_square_white.svg"></svg:SvgView>
+                </Frame>
+            </StackLayout>
+
+            <Frame AbsoluteLayout.LayoutBounds="{Binding IsVisible, Converter={StaticResource BooleanToMarginSidemenuButtonConverter}}"  AbsoluteLayout.LayoutFlags="PositionProportional" IsVisible="{Binding IsVisible}"
+                   HasShadow="True" CornerRadius="10" BackgroundColor="#1A6B9E" HeightRequest="80" BorderColor="Transparent" >
+                <Frame.GestureRecognizers>
+                    <TapGestureRecognizer NumberOfTapsRequired="1"
+                        Command="{Binding ToggleSideMenuCommand}">
+                    </TapGestureRecognizer>
+                </Frame.GestureRecognizers>
+                <svg:SvgView ResourceId="TouchPanel.Icons.sliders_h_square_white.svg"></svg:SvgView>
+            </Frame>
+            <Frame  AbsoluteLayout.LayoutBounds="{Binding IsVisible, Converter={StaticResource BooleanToMarginSidemenuConverter}}"  AbsoluteLayout.LayoutFlags="PositionProportional"  IsVisible="{Binding IsVisible}"
+                   Margin="-20,0,0,0" HasShadow="True"  CornerRadius="10" BackgroundColor="#1A6B9E" WidthRequest="0" HeightRequest="300">
+                <StackLayout Orientation="Vertical">
+                    <ListView ItemsSource="{Binding Presets}" RowHeight="70" SelectionMode="None">
+                        <ListView.ItemTemplate>
+                            <DataTemplate>
+                                <ViewCell Height="300">
+                            
+                                    <StackLayout Margin="0,5,0,5" Orientation="Horizontal">
+                                        <StackLayout.GestureRecognizers>
+                                            <TapGestureRecognizer NumberOfTapsRequired="1"
+   
+                                     Command="{Binding Path=BindingContext.SelectPresetCommand, Source={x:Reference RootPresetView}}"
+
+                                          CommandParameter="{Binding .}">     
+                                            </TapGestureRecognizer>
+                                        </StackLayout.GestureRecognizers>
+                                        <Label VerticalOptions="CenterAndExpand" Text="{Binding Number}" FontSize="26" TextColor="White"></Label>
+                                        <Frame   
+                                                    WidthRequest="250"
+                                                    BackgroundColor="White">
+                                            <Label FontSize="16" Text="{Binding Name}"></Label>
+                                        </Frame>
+                                    </StackLayout>
+                                </ViewCell>
+                            </DataTemplate>
+                        </ListView.ItemTemplate>
+                    </ListView>
+                    <Grid IsVisible="{Binding IsShowButtons}">
+                        <StackLayout IsVisible="{Binding IsSavePresetButtonPressed, Converter={StaticResource InverseBoolConverter}}"  Orientation="Horizontal">
+                            <Button  Command="{Binding SaveCurrentAsPresetCommand}" HorizontalOptions="FillAndExpand"  StyleClass="BlueButton"
+                               FontSize="16"
+                                     Text="Save current as preset">
+                            </Button>
+                        </StackLayout>
+                        <StackLayout IsVisible="{Binding IsSavePresetButtonPressed}" Orientation="Horizontal">
+                            <Label FontSize="20" TextColor="White" Text="Select a preset to overwrite"></Label>
+                            <Button  Command="{Binding CancelCommand}" 
+                                   StyleClass="RedButton"
+                                     Text="Cancel">
+                            </Button>
+                        </StackLayout>
+                    </Grid>
+
+                </StackLayout>
+            </Frame>
+            <Frame BackgroundColor="Accent" IsVisible="False" AbsoluteLayout.LayoutBounds="{Binding IsEditModalVisible, Converter={StaticResource BooleanToMarginBackgroundPresetConverter}}">
+               
+            </Frame>
+            <Frame  AbsoluteLayout.LayoutBounds="{Binding IsEditModalVisible, Converter={StaticResource BooleanToMarginEditPresetConverter}}"  AbsoluteLayout.LayoutFlags="PositionProportional"  
+                    IsVisible="{Binding IsEditModalVisible}"
+                   Margin="-20,0,0,0" HasShadow="True"  CornerRadius="10" BackgroundColor="#1A6B9E"
+                    WidthRequest="0" HeightRequest="300">
+                <Grid HorizontalOptions="StartAndExpand">
+                    <Grid.ColumnDefinitions>
+                        <ColumnDefinition Width="*" />
+
+                    </Grid.ColumnDefinitions>
+                    <Grid.RowDefinitions>
+                        <RowDefinition Height="20" />
+                        <RowDefinition Height="70" />
+                        <RowDefinition Height="70" />
+                    </Grid.RowDefinitions>
+                    <Label  Margin="30,0,0,0" Text="Enter name of preset" TextColor="White"></Label>
+                    <StackLayout Grid.Row="1" Orientation="Horizontal">
+                        <Label FontSize="24" VerticalOptions="Center" Text="{Binding SelectedPreset.Number}" Margin="0,0,10,0" TextColor="White"></Label>
+                        <Frame BackgroundColor="White" Padding="1" HorizontalOptions="Start"    >
+                            <Entry Margin="0,0,0,0" WidthRequest="290" HorizontalOptions="StartAndExpand"  FontSize="22" Text="{Binding NewPresetName}" TextColor="Black"></Entry>
+                        </Frame>
+                       
+                    </StackLayout>
+                    <StackLayout Grid.Row="2" Orientation="Horizontal" HorizontalOptions="Fill">
+                        <Button Margin="30,10,0,10"
+                                        WidthRequest="142"
+                                HorizontalOptions="StartAndExpand"
+                                StyleClass="RedButton" Text="Cancel" 
+                                Command="{Binding BindingContext.CancelCommand, Source={x:Reference RootPresetView}}">
+                        </Button>
+                        <Button Margin="0,10,0,10"
+                                StyleClass="BlueButton"  Text="Save"
+                                WidthRequest="142"
+                                  HorizontalOptions="Start"
+                                Command="{Binding BindingContext.SavePresetCommand, Source={x:Reference RootPresetView}}">
+                        </Button>
+                    </StackLayout>
+                   
+                </Grid>
+            </Frame>
+        </AbsoluteLayout>
+  </ContentView.Content>
+</ContentView>

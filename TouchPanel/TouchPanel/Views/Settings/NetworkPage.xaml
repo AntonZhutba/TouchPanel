@@ -1,0 +1,151 @@
+﻿<?xml version="1.0" encoding="utf-8" ?>
+<ContentView xmlns="http://xamarin.com/schemas/2014/forms"
+             xmlns:x="http://schemas.microsoft.com/winfx/2009/xaml"
+             xmlns:d="http://xamarin.com/schemas/2014/forms/design"
+             xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
+             xmlns:svg="clr-namespace:XamaRed.Forms.Svg;assembly=XamaRed.Forms.Svg"
+             mc:Ignorable="d"                   
+              xmlns:local="clr-namespace:TouchPanel.Helpers.Converters"
+                xmlns:controls="clr-namespace:TouchPanel.CustomControls;assembly=TouchPanel" 
+             x:Class="TouchPanel.Views.Settings.NetworkPage">
+    <ContentView.Resources>
+        <local:DHPCEnabledToToggleButtonColor x:Key="DHPCEnabledToToggleButtonColor"/>
+        <local:InverseBoolConverter x:Key="InverseBoolConverter"/>
+    </ContentView.Resources>
+    <ContentView.Content>
+        <Grid Margin="20,20,20,0">
+            <Grid.ColumnDefinitions>
+                <ColumnDefinition Width="*" />
+                <ColumnDefinition Width="*" />
+            </Grid.ColumnDefinitions>
+            <Grid.RowDefinitions>
+                <RowDefinition Height="60" />
+                <RowDefinition Height="80" />
+                <RowDefinition Height="80" />
+                <RowDefinition Height="80" />
+                <RowDefinition Height="*" />
+            </Grid.RowDefinitions>
+            
+
+
+            <Label Grid.ColumnSpan="2" FontSize="19" TextColor="Black"
+                   Text="Good job, now we need to define some network settings to get this panel to communicate with the DESKVIEW server and be accessible from the network">
+            </Label>
+            <StackLayout Grid.Column="1" Orientation="Horizontal" Margin="40,40,0,0">
+                <Label Text="DHCP Enabled" TextColor="Black" FontSize="20"></Label>
+                <Frame CornerRadius="10" BorderColor="White" Padding="2" Margin="0,-5,0,-5" WidthRequest="60">
+                    <Frame  HasShadow="True"
+                            BackgroundColor="{Binding NetworkSettings.IsDHCPEnabled, Converter={StaticResource DHPCEnabledToToggleButtonColor}}" 
+                            Padding="1">
+                        <Frame.GestureRecognizers>
+                            <TapGestureRecognizer NumberOfTapsRequired="1"
+                                    Command="{Binding ToggleDHPCCommand}">
+                            </TapGestureRecognizer>
+                        </Frame.GestureRecognizers>
+                        <StackLayout Orientation="Horizontal">
+                            <Frame IsVisible="{Binding NetworkSettings.IsDHCPEnabled}" 
+                                   CornerRadius="2" BorderColor="White" Padding="2" WidthRequest="20" Margin="0,0,0,0">
+                            <Frame BackgroundColor="#b2b6b7">
+                                    <Frame.GestureRecognizers>
+                                        <TapGestureRecognizer NumberOfTapsRequired="1"
+                                              Command="{Binding ToggleDHPCCommand}">
+                                        </TapGestureRecognizer>
+                                    </Frame.GestureRecognizers>
+                                </Frame>
+                        </Frame>
+                            <Frame IsVisible="{Binding NetworkSettings.IsDHCPEnabled, Converter={StaticResource InverseBoolConverter}}"
+                                   CornerRadius="2" BorderColor="White" WidthRequest="20" Padding="2" Margin="32,0,0,0">
+                            <Frame BackgroundColor="#b2b6b7">
+                                    <Frame.GestureRecognizers>
+                                        <TapGestureRecognizer NumberOfTapsRequired="1"
+                                              Command="{Binding ToggleDHPCCommand}">
+                                        </TapGestureRecognizer>
+                                    </Frame.GestureRecognizers>
+                                </Frame>
+                        </Frame>
+                        </StackLayout>
+                    </Frame>
+                </Frame>
+            </StackLayout>
+
+            <Grid VerticalOptions="StartAndExpand" Grid.Column="0" Grid.Row="1">
+                <Grid.ColumnDefinitions>
+                    <ColumnDefinition Width="35"  />
+                    <ColumnDefinition Width="*" />
+                </Grid.ColumnDefinitions>
+                <Grid.RowDefinitions>
+                    <RowDefinition Height="*" />
+                    <RowDefinition Height="*" />
+                </Grid.RowDefinitions>
+                <Label VerticalOptions="EndAndExpand" Grid.Row="0" Grid.Column="1"  Text="IP Adress"></Label>
+                <svg:SvgView Grid.Column="0" Grid.Row="1" ResourceId="TouchPanel.Icons.network_wired.svg" />
+                <Entry IsEnabled="{Binding NetworkSettings.IsDHCPEnabled, Converter={StaticResource InverseBoolConverter}}" 
+                    Keyboard="Default" Margin="0,-15,0,0"  FontSize="22"  Grid.Column="1" Grid.Row="1" Text="{Binding NetworkSettings.IPAddress}"></Entry>
+            </Grid>
+
+            <Grid VerticalOptions="StartAndExpand" Grid.Column="0" Grid.Row="2">
+                <Grid.ColumnDefinitions>
+                    <ColumnDefinition Width="35"  />
+                    <ColumnDefinition Width="*" />
+                </Grid.ColumnDefinitions>
+                <Grid.RowDefinitions>
+                    <RowDefinition Height="*" />
+                    <RowDefinition Height="*" />
+                </Grid.RowDefinitions>
+                <Label VerticalOptions="EndAndExpand" Grid.Row="0" Grid.Column="1"  Text="Subnet"></Label>
+                <svg:SvgView Grid.Column="0" Grid.Row="1" ResourceId="TouchPanel.Icons.network_wired.svg" />
+                <Entry IsEnabled="{Binding NetworkSettings.IsDHCPEnabled, Converter={StaticResource InverseBoolConverter}}" 
+                       Keyboard="Default" Margin="0,-15,0,0"  FontSize="22"  Grid.Column="1" Grid.Row="1" Text="{Binding NetworkSettings.Subnet}"></Entry>
+            </Grid>
+
+            <Grid VerticalOptions="StartAndExpand" Grid.Column="1" Grid.Row="1">
+                <Grid.ColumnDefinitions>
+                    <ColumnDefinition Width="35"  />
+                    <ColumnDefinition Width="*" />
+                </Grid.ColumnDefinitions>
+                <Grid.RowDefinitions>
+                    <RowDefinition Height="*" />
+                    <RowDefinition Height="*" />
+                </Grid.RowDefinitions>
+                <Label VerticalOptions="EndAndExpand"  Grid.Column="1"  Text="Primary DNS"></Label>
+                <svg:SvgView Grid.Column="0" Grid.Row="1" ResourceId="TouchPanel.Icons.globe.svg" />
+                <Entry IsEnabled="{Binding NetworkSettings.IsDHCPEnabled, Converter={StaticResource InverseBoolConverter}}"  
+                       Keyboard="Default" Margin="0,-15,0,0"  FontSize="22"  Grid.Column="1" Grid.Row="1" Text="{Binding NetworkSettings.PrimaryDNS}"></Entry>
+            </Grid>
+
+
+
+            <Grid VerticalOptions="StartAndExpand" Grid.Column="0" Grid.Row="3">
+                <Grid.ColumnDefinitions>
+                    <ColumnDefinition Width="35"  />
+                    <ColumnDefinition Width="*" />
+                </Grid.ColumnDefinitions>
+                <Grid.RowDefinitions>
+                    <RowDefinition Height="*" />
+                    <RowDefinition Height="*" />
+                </Grid.RowDefinitions>
+                <Label VerticalOptions="EndAndExpand" Grid.Row="0" Grid.Column="1"  Text="Gateway"></Label>
+                <svg:SvgView Grid.Column="0" Grid.Row="1" ResourceId="TouchPanel.Icons.server.svg" />
+                <Entry IsEnabled="{Binding NetworkSettings.IsDHCPEnabled, Converter={StaticResource InverseBoolConverter}}"  
+                       Keyboard="Default" Margin="0,-15,0,0"  FontSize="22"  Grid.Column="1" Grid.Row="1" Text="{Binding NetworkSettings.Gateway}"></Entry>
+            </Grid>
+
+            <Grid VerticalOptions="StartAndExpand" Grid.Column="1" Grid.Row="2">
+                <Grid.ColumnDefinitions>
+                    <ColumnDefinition Width="35"  />
+                    <ColumnDefinition Width="*" />
+                </Grid.ColumnDefinitions>
+                <Grid.RowDefinitions>
+                    <RowDefinition Height="*" />
+                    <RowDefinition Height="*" />
+                </Grid.RowDefinitions>
+                <Label VerticalOptions="EndAndExpand" Grid.Row="0" Grid.Column="1"  Text="Secondary DNS"></Label>
+                <svg:SvgView Grid.Column="0" Grid.Row="1" ResourceId="TouchPanel.Icons.globe.svg" />
+                <Entry IsEnabled="{Binding NetworkSettings.IsDHCPEnabled, Converter={StaticResource InverseBoolConverter}}" 
+                    Keyboard="Default" Margin="0,-15,0,0"  FontSize="22"  Grid.Column="1" Grid.Row="1" Text="{Binding NetworkSettings.SecondaryDNS}"></Entry>
+            </Grid>
+
+           
+        </Grid>
+    </ContentView.Content>
+</ContentView>

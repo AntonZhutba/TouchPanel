@@ -1,0 +1,77 @@
+﻿<?xml version="1.0" encoding="utf-8" ?>
+<ContentView xmlns="http://xamarin.com/schemas/2014/forms"
+             xmlns:x="http://schemas.microsoft.com/winfx/2009/xaml"
+             xmlns:d="http://xamarin.com/schemas/2014/forms/design"
+             xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
+            xmlns:local="clr-namespace:TouchPanel.Helpers.Converters"
+            xmlns:vm="clr-namespace:TouchPanel.ViewModels.Settings"
+            mc:Ignorable="d"
+            x:Class="TouchPanel.Views.Settings.SettingsPage"            
+            NavigationPage.HasNavigationBar="false"
+            x:Name="ParentView">
+
+    <ContentView.Resources>
+        <local:BooleanToNavigationTabColorConverter x:Key="BooleanToNavigationTabColorConverter"/>
+        <local:BooleanToPreviousButtonOpacity x:Key="BooleanToPreviousButtonOpacity"/>
+    </ContentView.Resources>
+    <ContentView.Content>
+        <RelativeLayout>
+
+
+            <CollectionView  ItemsSource="{Binding ViewModels}"
+                ItemsLayout="HorizontalList"
+                              RelativeLayout.YConstraint="{ConstraintExpression Type=RelativeToParent,
+                Property=Height, Factor=.075, Constant=0}"
+                RelativeLayout.HeightConstraint="{ConstraintExpression
+                Type=RelativeToParent,Property=Height,Factor=.085,Constant=0}"
+                RelativeLayout.WidthConstraint="{ConstraintExpression
+                Type=RelativeToParent,Property=Width,Factor=.95,Constant=0}"
+                RelativeLayout.XConstraint="{ConstraintExpression Type=RelativeToParent,
+                Property=Width, Factor=.05, Constant=0}">
+                <CollectionView.ItemTemplate>
+                    <DataTemplate>
+                        <StackLayout Orientation="Horizontal" >
+                            <Button WidthRequest="170" Margin="5,0" 
+                                    BackgroundColor="{Binding IsSelected, Converter={StaticResource BooleanToNavigationTabColorConverter}}"
+                                    Text="{Binding Name}"  FontSize="16"
+                                    Command="{Binding BindingContext.ChangeCurrentPageCommand, Source={x:Reference ParentView}}" CommandParameter="{Binding Name}"></Button>
+                        </StackLayout>
+                    </DataTemplate>
+                </CollectionView.ItemTemplate>
+            </CollectionView>
+            <Frame HasShadow="True" RelativeLayout.YConstraint="{ConstraintExpression Type=RelativeToParent,
+                Property=Height, Factor=.15, Constant=0}"
+                RelativeLayout.HeightConstraint="{ConstraintExpression
+                Type=RelativeToParent,Property=Height,Factor=.80,Constant=0}"
+                RelativeLayout.WidthConstraint="{ConstraintExpression
+                Type=RelativeToParent,Property=Width,Factor=.95,Constant=0}"
+                RelativeLayout.XConstraint="{ConstraintExpression Type=RelativeToParent,
+                Property=Width, Factor=.025, Constant=0}">
+                <Grid>
+                    <Grid.ColumnDefinitions>
+                    </Grid.ColumnDefinitions>
+                    <Grid.RowDefinitions>
+                        <RowDefinition Height="10*" />
+                        <RowDefinition Height="*" />
+                    </Grid.RowDefinitions>
+
+
+                    <ContentView Grid.Row="0" BackgroundColor="White" Content="{Binding CurrentPage.View}" />
+                    <StackLayout Grid.Row="1" Orientation="Horizontal">
+                        <Button WidthRequest="120" HorizontalOptions="StartAndExpand" BackgroundColor="#E55E40"
+                        Command="{Binding CancelCommand}"
+                        TextColor="WhiteSmoke" BorderWidth="1" BorderColor="LightGray" Text="Cancel"></Button>
+                        <Button WidthRequest="120" 
+                        Command="{Binding GoPreviousCommand}" Opacity="1" IsEnabled="{Binding IsPreviousEnabled}" 
+                        BackgroundColor ="{Binding IsPreviousEnabled, Converter={StaticResource BooleanToPreviousButtonOpacity}}" HorizontalOptions="End"
+                        TextColor="WhiteSmoke" BorderWidth="1" BorderColor="LightGray" Text="Previous"></Button>
+                        <Button WidthRequest="120"  BackgroundColor="DodgerBlue"
+                        Command="{Binding GoNextCommand}"  HorizontalOptions="End"
+                        TextColor="WhiteSmoke" BorderWidth="1" BorderColor="LightGray" Text="{Binding NextButtonText}"></Button>
+                      
+                    </StackLayout>
+                </Grid>
+            </Frame>
+        </RelativeLayout>
+    </ContentView.Content>
+</ContentView>

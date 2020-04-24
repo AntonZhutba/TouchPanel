@@ -1,0 +1,34 @@
+﻿<?xml version="1.0" encoding="utf-8" ?>
+<ContentView xmlns="http://xamarin.com/schemas/2014/forms"
+             xmlns:x="http://schemas.microsoft.com/winfx/2009/xaml"
+             xmlns:d="http://xamarin.com/schemas/2014/forms/design"
+             xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
+             mc:Ignorable="d"             
+             NavigationPage.HasNavigationBar="false"
+             xmlns:svg="clr-namespace:XamaRed.Forms.Svg;assembly=XamaRed.Forms.Svg"
+             x:Class="TouchPanel.Views.PowerControl.PowerStatusPage">
+    <ContentView.Content>
+        <StackLayout Orientation="Vertical">
+            <svg:SvgView Margin="0,250,0,25"
+                HeightRequest="70" WidthRequest="70"
+                HorizontalAligment="Middle"
+                ResourceId="{Binding SvgPath}" />
+            <Label Text="{Binding StatusText}"
+                FontSize="34" TextColor="White"
+     
+                HorizontalOptions="CenterAndExpand" />
+            <Image Source="Logo_Option_White.png"
+                   HorizontalOptions="CenterAndExpand"
+                   
+                   Scale="0.15">
+            </Image>
+
+            <Label   
+                FontSize="18" TextColor="White"
+                 VerticalOptions="EndAndExpand" 
+                HorizontalOptions="CenterAndExpand"
+                Text="DESKVIEW™">
+            </Label>
+        </StackLayout>
+    </ContentView.Content>
+</ContentView>

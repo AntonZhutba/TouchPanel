@@ -1,0 +1,117 @@
+﻿<?xml version="1.0" encoding="utf-8" ?>
+<ContentView xmlns="http://xamarin.com/schemas/2014/forms"
+             xmlns:x="http://schemas.microsoft.com/winfx/2009/xaml"
+             xmlns:d="http://xamarin.com/schemas/2014/forms/design"
+             xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
+             xmlns:models="clr-namespace:TouchPanel.Models"
+             mc:Ignorable="d"
+             xmlns:svg="clr-namespace:XamaRed.Forms.Svg;assembly=XamaRed.Forms.Svg"
+             
+             x:Class="TouchPanel.Views.MainPage"
+             NavigationPage.HasNavigationBar="false">
+
+    <ContentView.Resources>
+        <Style TargetType="Button" Class="BlueButton">
+            <Setter Property="BackgroundColor"
+                    Value="DodgerBlue" />
+            <Setter Property="TextColor"
+                    Value="WhiteSmoke" />
+            <Setter Property="BorderWidth"
+                    Value="1" />
+            <Setter Property="BorderColor"
+                    Value="LightGray" />
+        </Style>
+        <Style TargetType="Button" Class="RedButton">
+            <Setter Property="BackgroundColor"
+                    Value="#E55E40" />
+            <Setter Property="TextColor"
+                    Value="WhiteSmoke" />
+            <Setter Property="BorderWidth"
+                    Value="1" />
+            <Setter Property="BorderColor"
+                    Value="LightGray" />
+        </Style>
+    </ContentView.Resources>
+
+    <ContentView.Content>
+        <Grid Margin="10" HorizontalOptions="CenterAndExpand">
+            <Grid.ColumnDefinitions>
+                <ColumnDefinition Width="150" />
+                <ColumnDefinition Width="150" />
+                <ColumnDefinition Width="150" />
+                <ColumnDefinition Width="150" />
+                <ColumnDefinition Width="150" />
+            </Grid.ColumnDefinitions>
+            <Grid.RowDefinitions>
+                <RowDefinition Height="3*" />
+                <RowDefinition Height="*" />
+            </Grid.RowDefinitions>
+            <ContentView HorizontalOptions="Center" Grid.ColumnSpan="5" VerticalOptions="Center" Content="{Binding CurrentPartial}" ></ContentView>
+            <ContentView Grid.Row="1" Grid.Column="0">
+                <ContentView.GestureRecognizers>
+                    <TapGestureRecognizer NumberOfTapsRequired="1"
+                            Command="{Binding OpenPageCommand}"
+                            CommandParameter="{x:Static models:MainPageType.Contacts}">
+                    </TapGestureRecognizer>
+                </ContentView.GestureRecognizers>
+                <StackLayout Orientation="Vertical" HorizontalOptions="CenterAndExpand" >
+                    <svg:SvgView HeightRequest="70" WidthRequest="70" HorizontalAligment="Middle" VerticalAligment="Middle" ResourceId="TouchPanel.Icons.user_white.svg" />
+                    <Label FontSize="22" TextColor="White" Text="Contacts"></Label>
+                </StackLayout>
+            </ContentView>
+
+            <ContentView Grid.Row="1" Grid.Column="1">
+                <ContentView.GestureRecognizers>
+                    <TapGestureRecognizer NumberOfTapsRequired="1"
+                            Command="{Binding OpenPageCommand}"
+                            CommandParameter="{x:Static models:MainPageType.Dial}">
+                    </TapGestureRecognizer>
+                </ContentView.GestureRecognizers>
+                <StackLayout Orientation="Vertical" HorizontalOptions="CenterAndExpand" >
+                    <svg:SvgView HeightRequest="70" WidthRequest="70"  HorizontalAligment="Middle" VerticalAligment="Middle" ResourceId="TouchPanel.Icons.keyboard_white.svg" />
+                    <Label FontSize="22" TextColor="White" HorizontalOptions="Center"  Text="Dial"></Label>
+                </StackLayout>
+            </ContentView>
+
+            <ContentView Grid.Row="1" Grid.Column="2">
+                <ContentView.GestureRecognizers>
+                    <TapGestureRecognizer NumberOfTapsRequired="1"
+                            Command="{Binding OpenPageCommand}"
+                            CommandParameter="{x:Static models:MainPageType.Source}">
+                    </TapGestureRecognizer>
+                </ContentView.GestureRecognizers>
+                <StackLayout Orientation="Vertical" HorizontalOptions="CenterAndExpand" >
+                    <svg:SvgView HeightRequest="70" WidthRequest="70"  HorizontalAligment="Middle" VerticalAligment="Middle" ResourceId="TouchPanel.Icons.tv_select_source_white.svg" />
+                    <Label FontSize="22" TextColor="White" HorizontalOptions="Center"  Text="Source"></Label>
+                </StackLayout>
+            </ContentView>
+
+            <ContentView Grid.Row="1" Grid.Column="3">
+                <ContentView.GestureRecognizers>
+                    <TapGestureRecognizer NumberOfTapsRequired="1"
+                            Command="{Binding OpenPageCommand}"
+                            CommandParameter="{x:Static models:MainPageType.Settings}">
+                    </TapGestureRecognizer>
+                </ContentView.GestureRecognizers>
+                <StackLayout Orientation="Vertical" HorizontalOptions="CenterAndExpand" >
+                    <svg:SvgView HeightRequest="70" WidthRequest="70"  HorizontalAligment="Middle" VerticalAligment="Middle" ResourceId="TouchPanel.Icons.cogs_white.svg" />
+                    <Label FontSize="22" TextColor="White" HorizontalOptions="Center"  Text="Settings"></Label>
+                </StackLayout>
+            </ContentView>
+            <ContentView Grid.Row="1" Grid.Column="4">
+                <ContentView.GestureRecognizers>
+                    <TapGestureRecognizer NumberOfTapsRequired="1"
+                            Command="{Binding OpenPageCommand}"
+                            CommandParameter="{x:Static models:MainPageType.Power}">
+                    </TapGestureRecognizer>
+                </ContentView.GestureRecognizers>
+                <StackLayout Orientation="Vertical" HorizontalOptions="CenterAndExpand" >
+                    <svg:SvgView HeightRequest="70" WidthRequest="70"  HorizontalAligment="Middle" VerticalAligment="Middle" ResourceId="TouchPanel.Icons.power_off_white.svg" />
+                    <Label FontSize="22" TextColor="White" HorizontalOptions="Center"  Text="Power"></Label>
+                </StackLayout>
+            </ContentView>
+
+
+        </Grid>
+    </ContentView.Content>
+</ContentView>

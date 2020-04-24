@@ -1,0 +1,182 @@
+﻿<Project Sdk="Microsoft.NET.Sdk" ToolsVersion="15.0">
+  <PropertyGroup>
+    <TargetFramework>netstandard2.0</TargetFramework>
+    <ProduceReferenceAssembly>true</ProduceReferenceAssembly>
+    <FileUpgradeFlags>40</FileUpgradeFlags>
+    <UpgradeBackupLocation>C:\Users\andrey.konkin\source\TouchPanel\Backup\TouchPanel\TouchPanel\</UpgradeBackupLocation>
+    <OldToolsVersion>2.0</OldToolsVersion>
+  </PropertyGroup>
+  <ItemGroup>
+    <None Remove="Icons\cogs.svg" />
+    <None Remove="Icons\arrow_circle_left.svg" />
+    <None Remove="Icons\building.svg" />
+    <None Remove="Icons\edit.svg" />
+    <None Remove="Icons\ellipsis_v.svg" />
+    <None Remove="Icons\globe.svg" />
+    <None Remove="Icons\info_square.svg" />
+    <None Remove="Icons\keyboard.svg" />
+    <None Remove="Icons\link.svg" />
+    <None Remove="Icons\location_circle.svg" />
+    <None Remove="Icons\lock_alt.svg" />
+    <None Remove="Icons\moon_stars.svg" />
+    <None Remove="Icons\network_wired.svg" />
+    <None Remove="Icons\phone.svg" />
+    <None Remove="Icons\plus.svg" />
+    <None Remove="Icons\power_off.svg" />
+    <None Remove="Icons\project_diagram.svg" />
+    <None Remove="Icons\search.svg" />
+    <None Remove="Icons\server.svg" />
+    <None Remove="Icons\sliders_h_square.svg" />
+    <None Remove="Icons\tag.svg" />
+    <None Remove="Icons\trash_alt.svg" />
+    <None Remove="Icons\tv_select_source.svg" />
+    <None Remove="Icons\undo.svg" />
+    <None Remove="Icons\user.svg" />
+    <None Remove="Icons\user_tag.svg" />
+    <None Remove="Icons\users_class.svg" />
+    <None Remove="Icons\volume_mute.svg" />
+    <None Remove="Icons\volume_up.svg" />
+    <None Remove="Icons\webcam.svg" />
+    <None Remove="Icons\wifi.svg" />
+    <None Remove="Icons\arrow-down.svg" />
+    <None Remove="Icons\user_white.svg" />
+    <None Remove="Icons\keyboard_white.svg" />
+    <None Remove="Icons\cogs_white.svg" />
+    <None Remove="Icons\power_off_white.svg" />
+    <None Remove="Icons\tv_select_source_white.svg" />
+    <None Remove="Icons\undo_white.svg" />
+    <None Remove="Icons\moon_stars_white.svg" />
+    <None Remove="Icons\phone_white.svg" />
+    <None Remove="Icons\sliders_h_square_white.svg" />
+    <None Remove="Icons\arrow_circle_white.svg" />
+    <None Remove="Icons\micro_muted.svg" />
+  </ItemGroup>
+  <ItemGroup>
+    <EmbeddedResource Include="Icons\cogs.svg" />
+    <EmbeddedResource Include="Icons\arrow_circle_left.svg" />
+    <EmbeddedResource Include="Icons\building.svg" />
+    <EmbeddedResource Include="Icons\edit.svg" />
+    <EmbeddedResource Include="Icons\ellipsis_v.svg" />
+    <EmbeddedResource Include="Icons\globe.svg" />
+    <EmbeddedResource Include="Icons\info_square.svg" />
+    <EmbeddedResource Include="Icons\keyboard.svg" />
+    <EmbeddedResource Include="Icons\link.svg" />
+    <EmbeddedResource Include="Icons\location_circle.svg" />
+    <EmbeddedResource Include="Icons\lock_alt.svg" />
+    <EmbeddedResource Include="Icons\moon_stars.svg" />
+    <EmbeddedResource Include="Icons\network_wired.svg" />
+    <EmbeddedResource Include="Icons\phone.svg" />
+    <EmbeddedResource Include="Icons\plus.svg" />
+    <EmbeddedResource Include="Icons\power_off.svg" />
+    <EmbeddedResource Include="Icons\project_diagram.svg" />
+    <EmbeddedResource Include="Icons\search.svg" />
+    <EmbeddedResource Include="Icons\server.svg" />
+    <EmbeddedResource Include="Icons\sliders_h_square.svg" />
+    <EmbeddedResource Include="Icons\tag.svg" />
+    <EmbeddedResource Include="Icons\trash_alt.svg" />
+    <EmbeddedResource Include="Icons\tv_select_source.svg" />
+    <EmbeddedResource Include="Icons\undo.svg" />
+    <EmbeddedResource Include="Icons\user.svg" />
+    <EmbeddedResource Include="Icons\user_tag.svg" />
+    <EmbeddedResource Include="Icons\users_class.svg" />
+    <EmbeddedResource Include="Icons\volume_mute.svg" />
+    <EmbeddedResource Include="Icons\volume_up.svg" />
+    <EmbeddedResource Include="Icons\webcam.svg" />
+    <EmbeddedResource Include="Icons\wifi.svg" />
+    <EmbeddedResource Include="Icons\arrow-down.svg" />
+    <EmbeddedResource Include="Icons\user_white.svg" />
+    <EmbeddedResource Include="Icons\keyboard_white.svg" />
+    <EmbeddedResource Include="Icons\cogs_white.svg" />
+    <EmbeddedResource Include="Icons\power_off_white.svg" />
+    <EmbeddedResource Include="Icons\tv_select_source_white.svg" />
+    <EmbeddedResource Include="Icons\undo_white.svg" />
+    <EmbeddedResource Include="Icons\moon_stars_white.svg" />
+    <EmbeddedResource Include="Icons\phone_white.svg" />
+    <EmbeddedResource Include="Icons\sliders_h_square_white.svg" />
+    <EmbeddedResource Include="Icons\arrow_circle_white.svg" />
+    <EmbeddedResource Include="Icons\micro_muted.svg" />
+  </ItemGroup>
+  <ItemGroup>
+    <PackageReference Include="Microsoft.CSharp" Version="4.7.0" />
+    <PackageReference Include="Newtonsoft.Json" Version="12.0.3" />
+    <PackageReference Include="PCLStorage" Version="1.0.2" />
+    <PackageReference Include="Syncfusion.Xamarin.Buttons" Version="17.4.0.55" />
+    <PackageReference Include="XamaRed.Forms.Svg" Version="1.1.0" />
+    <PackageReference Include="Xamarin.CustomControls.RepeaterView" Version="1.2.2" />
+    <PackageReference Include="Xamarin.Forms" Version="4.3.0.908675" />
+    <PackageReference Include="Xamarin.Essentials" Version="1.3.1" />
+    <PackageReference Include="XLabs.Forms" Version="2.0.5782" />
+  </ItemGroup>
+  <ItemGroup>
+    <Reference Include="Mono.Android">
+      <HintPath>..\..\..\..\..\..\Program Files (x86)\Microsoft Visual Studio\2019\Community\Common7\IDE\ReferenceAssemblies\Microsoft\Framework\MonoAndroid\v9.0\Mono.Android.dll</HintPath>
+    </Reference>
+    <Reference Include="Xamarin.Forms.Platform.Android">
+      <HintPath>..\..\..\..\..\..\Microsoft\Xamarin\NuGet\xamarin.forms\4.3.0.908675\lib\MonoAndroid90\Xamarin.Forms.Platform.Android.dll</HintPath>
+    </Reference>
+  </ItemGroup>
+  <ItemGroup>
+    <Compile Update="Views\Settings\ServerPage.xaml.cs">
+      <DependentUpon>ServerPage.xaml</DependentUpon>
+    </Compile>
+  </ItemGroup>
+  <ItemGroup>
+    <EmbeddedResource Update="CustomControls\Controls.xaml">
+      <Generator>MSBuild:UpdateDesignTimeXaml</Generator>
+    </EmbeddedResource>
+    <EmbeddedResource Update="Views\BaseNavigationPage.xaml">
+      <Generator>MSBuild:UpdateDesignTimeXaml</Generator>
+    </EmbeddedResource>
+    <EmbeddedResource Update="Views\Contacts\ContactDetailsPage.xaml">
+      <Generator>MSBuild:UpdateDesignTimeXaml</Generator>
+    </EmbeddedResource>
+    <EmbeddedResource Update="Views\Contacts\ContactsListPage.xaml">
+      <Generator>MSBuild:UpdateDesignTimeXaml</Generator>
+    </EmbeddedResource>
+    <EmbeddedResource Update="Views\Contacts\DialingPage.xaml">
+      <Generator>MSBuild:UpdateDesignTimeXaml</Generator>
+    </EmbeddedResource>
+    <EmbeddedResource Update="Views\CurrentDateView.xaml">
+      <Generator>MSBuild:UpdateDesignTimeXaml</Generator>
+    </EmbeddedResource>
+    <EmbeddedResource Update="Views\Dial\ContactDialListPage.xaml">
+      <Generator>MSBuild:UpdateDesignTimeXaml</Generator>
+    </EmbeddedResource>
+    <EmbeddedResource Update="Views\MainPage.xaml">
+      <Generator>MSBuild:UpdateDesignTimeXaml</Generator>
+    </EmbeddedResource>
+    <EmbeddedResource Update="Views\PowerControl\PowerControlView.xaml">
+      <Generator>MSBuild:UpdateDesignTimeXaml</Generator>
+    </EmbeddedResource>
+    <EmbeddedResource Update="Views\PowerControl\PowerStatusPage.xaml">
+      <Generator>MSBuild:UpdateDesignTimeXaml</Generator>
+    </EmbeddedResource>
+    <EmbeddedResource Update="Views\Settings\DeskviewPage.xaml">
+      <Generator>MSBuild:UpdateDesignTimeXaml</Generator>
+    </EmbeddedResource>
+    <EmbeddedResource Update="Views\Settings\InterfacePage.xaml">
+      <Generator>MSBuild:UpdateDesignTimeXaml</Generator>
+    </EmbeddedResource>
+    <EmbeddedResource Update="Views\Settings\NetworkPage.xaml">
+      <Generator>MSBuild:UpdateDesignTimeXaml</Generator>
+    </EmbeddedResource>
+    <EmbeddedResource Update="Views\Settings\ServerPage.xaml">
+      <Generator>MSBuild:UpdateDesignTimeXaml</Generator>
+    </EmbeddedResource>
+    <EmbeddedResource Update="Views\Settings\SettingsPage.xaml">
+      <Generator>MSBuild:UpdateDesignTimeXaml</Generator>
+    </EmbeddedResource>
+    <EmbeddedResource Update="Views\Source\PinEntryPage.xaml">
+      <Generator>MSBuild:UpdateDesignTimeXaml</Generator>
+    </EmbeddedResource>
+    <EmbeddedResource Update="Views\Source\PresetListView.xaml">
+      <Generator>MSBuild:UpdateDesignTimeXaml</Generator>
+    </EmbeddedResource>
+    <EmbeddedResource Update="Views\Source\SourceListPage.xaml">
+      <Generator>MSBuild:UpdateDesignTimeXaml</Generator>
+    </EmbeddedResource>
+  </ItemGroup>
+  <ItemGroup>
+    <Folder Include="Providers\" />
+  </ItemGroup>
+</Project>

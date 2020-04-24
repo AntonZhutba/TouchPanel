@@ -1,0 +1,188 @@
+﻿<?xml version="1.0" encoding="UTF-8"?>
+<ContentView xmlns="http://xamarin.com/schemas/2014/forms" 
+             xmlns:x="http://schemas.microsoft.com/winfx/2009/xaml"
+             xmlns:d="http://xamarin.com/schemas/2014/forms/design"
+             xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
+             mc:Ignorable="d"
+               xmlns:local="clr-namespace:TouchPanel.Helpers.Converters"
+              xmlns:svg="clr-namespace:XamaRed.Forms.Svg;assembly=XamaRed.Forms.Svg"
+             x:Class="TouchPanel.Views.Settings.DeskviewPage"
+               x:Name="Root">
+    <ContentView.Resources>
+        <local:ConnactStatusToButtonColor x:Key="ConnactStatusToButtonColor"/>
+        <local:BooleanToPreviousButtonOpacity x:Key="BooleanToPreviousButtonOpacity"/>
+        <local:InverseBoolConverter x:Key="InverseBoolConverter"></local:InverseBoolConverter>
+    </ContentView.Resources>
+    <ContentView.Content>
+        <Grid Margin="20,20,20,0">
+            <Grid.ColumnDefinitions>
+                <ColumnDefinition Width="*" />
+                <ColumnDefinition Width="*" />
+            </Grid.ColumnDefinitions>
+            <Grid.RowDefinitions>
+                <RowDefinition Height="50" />
+                <RowDefinition Height="80" />
+                <RowDefinition Height="80" />
+                <RowDefinition Height="40" />
+                <RowDefinition Height="*" />
+            
+            </Grid.RowDefinitions>
+
+            <Label Grid.ColumnSpan="2" FontSize="20" TextColor="Black" Text="Welcome this configuration wizard, your panel will be ready to use in 4 easy steps. First we need to get some information in regards to what this panel will be called and where it located">
+                
+            </Label>
+
+     
+            <Grid VerticalOptions="StartAndExpand" Grid.Column="0" Grid.Row="1">
+                <Grid.ColumnDefinitions>
+                    <ColumnDefinition Width="35"  />
+                    <ColumnDefinition Width="*" />
+                </Grid.ColumnDefinitions>
+                <Grid.RowDefinitions>
+                    <RowDefinition Height="*" />
+                    <RowDefinition Height="*" />
+                </Grid.RowDefinitions>
+                <Label VerticalOptions="EndAndExpand" Grid.Row="0" Grid.Column="1"  Text="DESKVIEW™ Server"></Label>
+                <svg:SvgView Grid.Column="0" Grid.Row="1" ResourceId="TouchPanel.Icons.server.svg" />
+                <Entry Margin="0,-15,0,0"  FontSize="22"  Grid.Column="1" Grid.Row="1" Text="{Binding DeskViewSettings.DeskViewServer}"></Entry>
+            </Grid>
+
+            <Button Grid.Row="1" Margin="395,22,0,15" Padding="0,0,0,3"
+                    FontSize="20"
+                    Command="{Binding ConnectCommand}"
+                    Text="{Binding ConnectButtonText}" WidthRequest="150"
+                    TextColor="WhiteSmoke" BorderWidth="2" BorderColor="LightGray"
+                    BackgroundColor="{Binding ConnectStatus, Converter={StaticResource ConnactStatusToButtonColor}}">
+
+            </Button>
+
+            <Label Margin="15,0,0,0" VerticalOptions="CenterAndExpand" Grid.Column="1" Grid.Row="1" Text="{Binding ErrorMessage}" TextColor="Red" FontSize="18"></Label>
+
+            <Grid VerticalOptions="StartAndExpand" Grid.Column="0" Grid.Row="2">
+                <Grid.ColumnDefinitions>
+                    <ColumnDefinition Width="35"  />
+                    <ColumnDefinition Width="*" />
+                </Grid.ColumnDefinitions>
+                <Grid.RowDefinitions>
+                    <RowDefinition Height="*" />
+                    <RowDefinition Height="*" />
+                </Grid.RowDefinitions>
+                <Label VerticalOptions="EndAndExpand" Grid.Row="0" Grid.Column="1"  Text="Name of panel"></Label>
+                <svg:SvgView Grid.Column="0" Grid.Row="1" ResourceId="TouchPanel.Icons.info_square.svg" />
+                <Entry Margin="0,-15,0,0"  FontSize="22"  Grid.Column="1" Grid.Row="1" Text="{Binding DeskViewSettings.PanelName}"></Entry>
+            </Grid>
+
+            <Grid VerticalOptions="StartAndExpand" Grid.Column="1" Grid.Row="2">
+                <Grid.ColumnDefinitions>
+                    <ColumnDefinition Width="35"  />
+                    <ColumnDefinition Width="*" />
+                    <ColumnDefinition Width="35" />
+                </Grid.ColumnDefinitions>
+                <Grid.RowDefinitions>
+                    <RowDefinition Height="*" />
+                    <RowDefinition Height="*" />
+                </Grid.RowDefinitions>
+                <Label VerticalOptions="EndAndExpand" Grid.Row="0" Grid.Column="1"  Text="Location"></Label>
+                <svg:SvgView Grid.Column="0" Grid.Row="1" ResourceId="TouchPanel.Icons.location_circle.svg" />
+                <Entry Margin="0,-15,0,0"  FontSize="22"  Grid.Column="1" Grid.Row="1" Text="{Binding DeskViewSettings.Location}"></Entry>
+            </Grid>
+
+
+            <Grid Grid.Row="3" Grid.ColumnSpan="2">
+                <Grid.ColumnDefinitions>
+                    <ColumnDefinition Width="35"  />
+                    <ColumnDefinition Width="*" />
+                </Grid.ColumnDefinitions>
+                <Grid.RowDefinitions>
+                    <RowDefinition Height="30" />
+                    <RowDefinition Height="130" />
+                </Grid.RowDefinitions>
+                <Label Margin="12,5,0,0"  Grid.Column="1" TextColor="Black" FontSize="16" Text="Select panel background"></Label>
+                <svg:SvgView Margin="3,30,3,0" Grid.Column="0" Grid.RowSpan="2" ResourceId="TouchPanel.Icons.location_circle.svg" />
+                <Label  IsVisible="{Binding IsConnected, Converter={StaticResource InverseBoolConverter}}" Grid.Row="1" Grid.Column="1" Margin="10,10">
+                    Connect to a DESKVIEW™ server to receive background image</Label>
+                <CollectionView IsTabStop="False" IsVisible="{Binding IsConnected}" Grid.Row="1" Grid.Column="1" ItemsSource="{Binding BackgroundImages}" >
+                    <CollectionView.ItemsLayout >
+                        <LinearItemsLayout Orientation="Horizontal"></LinearItemsLayout>
+                    </CollectionView.ItemsLayout>
+
+                    <CollectionView.ItemTemplate>
+                        <DataTemplate>
+                            <Grid  Padding="5">
+                                <Grid.GestureRecognizers>
+                                    <TapGestureRecognizer NumberOfTapsRequired="1"                                            
+                                            Command="{Binding BindingContext.SelectBackGroundCommand,  Source={x:Reference Root}}"
+                                            CommandParameter="{Binding .}">
+                                    </TapGestureRecognizer>
+                                </Grid.GestureRecognizers>
+                                <Grid.RowDefinitions>
+                                    <RowDefinition Height="100" />
+                                    <RowDefinition Height="40" />
+                                </Grid.RowDefinitions>
+                             
+                                <Frame Grid.Row="0"  WidthRequest="150" Padding="1" Margin="0,0,0,0"  BorderColor="Gray" HasShadow="True">
+                                    <Frame.GestureRecognizers>
+                                        <TapGestureRecognizer NumberOfTapsRequired="1"                                            
+                                            Command="{Binding BindingContext.SelectBackGroundCommand,  Source={x:Reference Root}}"
+                                            CommandParameter="{Binding .}">
+                                        </TapGestureRecognizer>
+                                    </Frame.GestureRecognizers>
+                                    <Image Source="{Binding Name}">
+                                    </Image>
+                                </Frame>
+                                <Label Grid.Row="1" TextColor="Black" FontSize="18" Margin="50,-5,0,0" IsVisible="{Binding IsSelected}" Text="Selected"></Label>
+
+                            </Grid>
+
+                        </DataTemplate>
+                    </CollectionView.ItemTemplate>
+                </CollectionView>
+                
+            </Grid>
+
+            <!--<Entry IsEnabled="False" Grid.Column="0" Grid.ColumnSpan="2" Grid.Row="2" HorizontalOptions="FillAndExpand" HeightRequest="1" Placeholder="DESKVIEW™ options" IsReadOnly="True"/>
+            <Grid Margin="20,0,0,0" Grid.Row="3" Grid.ColumnSpan="2">
+                <Grid.ColumnDefinitions>
+                    <ColumnDefinition Width="*" />
+                    <ColumnDefinition Width="*" />
+                    <ColumnDefinition Width="*" />
+                </Grid.ColumnDefinitions>
+                <Grid.RowDefinitions>
+                    <RowDefinition Height="65" />
+                    <RowDefinition Height="65" />
+                </Grid.RowDefinitions>
+
+                <StackLayout Grid.Row="0" Grid.Column="0" Orientation="Horizontal" VerticalOptions="Center" >
+                    <CheckBox Scale="1.2" Color="Black" BackgroundColor="White" IsChecked="{Binding DeskViewSettings.IsUserAllowedOnlyToLogin }"  />
+                    <Label FontSize="18" Margin="0,2" Text="Allow only user to login"></Label>
+                </StackLayout>
+
+                <StackLayout Grid.Row="1" Grid.Column="0" Orientation="Horizontal" VerticalOptions="Center" >
+                    <CheckBox Scale="1.2" Color="Black" BackgroundColor="White" IsChecked="{Binding DeskViewSettings.IsAddingCiscoUserFromPanel }"  />
+                    <Label FontSize="18" Margin="0,2" Text="Add Cisco user from panel"></Label>
+                </StackLayout>
+
+                <StackLayout Grid.Row="0" Grid.Column="1" Orientation="Horizontal" VerticalOptions="Center" >
+                    <CheckBox Scale="1.2" Color="Black" BackgroundColor="White" IsChecked="{Binding DeskViewSettings.IsRestrictedToUseOnlyInSameRoom }"  />
+                    <Label FontSize="18" Margin="0,2" Text="Restrict to only computer in same room"></Label>
+                </StackLayout>
+
+                <StackLayout Grid.Row="1" Grid.Column="1" Orientation="Horizontal" VerticalOptions="Center" >
+                    <CheckBox Scale="1.2" Color="Black" BackgroundColor="White" IsChecked="{Binding DeskViewSettings.IsGettingCatalogFromServer }"  />
+                    <Label FontSize="18" Margin="0,2" Text="Get catalog from server"></Label>
+                </StackLayout>
+
+                <StackLayout Grid.Row="0" Grid.Column="2" Orientation="Horizontal" VerticalOptions="Center" >
+                    <CheckBox Scale="1.2" Color="Black" BackgroundColor="White" IsChecked="{Binding DeskViewSettings.IsGettingScreenshotsFromServer }"  />
+                    <Label FontSize="18" Margin="0,2" Text="Get screenshots from server"></Label>
+                </StackLayout>
+
+                <StackLayout Grid.Row="1" Grid.Column="2" Orientation="Horizontal" VerticalOptions="Center" >
+                    <CheckBox Scale="1.2" Color="Black" BackgroundColor="White" IsChecked="{Binding DeskViewSettings.IsCompabilityModeEnabled }"  />
+                    <Label FontSize="18" Margin="0,2" Text="Set in Compability mode"></Label>
+                </StackLayout>
+            </Grid>-->
+         
+        </Grid>
+    </ContentView.Content>
+</ContentView>

@@ -1,0 +1,135 @@
+﻿<?xml version="1.0" encoding="utf-8" ?>
+<ContentView xmlns="http://xamarin.com/schemas/2014/forms"
+             xmlns:x="http://schemas.microsoft.com/winfx/2009/xaml"
+             xmlns:d="http://xamarin.com/schemas/2014/forms/design"
+             xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
+             xmlns:svg="clr-namespace:XamaRed.Forms.Svg;assembly=XamaRed.Forms.Svg"             
+             NavigationPage.HasNavigationBar="false"
+             mc:Ignorable="d"
+             x:Class="TouchPanel.Views.Contacts.ContactDetailsPage">
+    <ContentView.Content>
+        <Grid Margin="30,50,50,50" Padding="40,0,10,60" VerticalOptions="StartAndExpand" BackgroundColor="White">
+            <Grid.ColumnDefinitions>
+                <ColumnDefinition Width="*" />
+                <ColumnDefinition Width="*" />
+            </Grid.ColumnDefinitions>
+            <Grid.RowDefinitions>
+                <RowDefinition Height="60" />
+                <RowDefinition Height="2" />
+                <RowDefinition Height="90" />
+                <RowDefinition Height="90" />
+                <RowDefinition Height="90" />
+                <RowDefinition Height="*" />
+                
+            </Grid.RowDefinitions>
+            <Label 
+                 Grid.Column="0" 
+                Grid.ColumnSpan="2" Grid.Row="0" 
+                HorizontalOptions="FillAndExpand" 
+                Margin="0,20,0,0"
+                TextColor="Black"
+                FontSize="28"
+                Text="{Binding HeaderText}">
+            </Label>
+            <BoxView BackgroundColor="LightGray" HorizontalOptions="FillAndExpand" Grid.Row="1" Grid.ColumnSpan="2"></BoxView>
+
+            <Grid VerticalOptions="StartAndExpand" Grid.Row="2" Grid.Column="0" Grid.ColumnSpan="2">
+                <Grid.ColumnDefinitions>
+                    <ColumnDefinition Width="35"  />
+                    <ColumnDefinition Width="*" />
+                </Grid.ColumnDefinitions>
+                <Grid.RowDefinitions>
+                    <RowDefinition Height="*" />
+                    <RowDefinition Height="*" />
+                </Grid.RowDefinitions>
+                <Label VerticalOptions="EndAndExpand" Grid.Row="0" Grid.Column="1"  Text="Video conference address (URL)"></Label>
+                <svg:SvgView Grid.Column="0" Grid.Row="1" ResourceId="TouchPanel.Icons.link.svg" />
+                <Entry Margin="0,-5,0,0"  FontSize="22"  Grid.Column="1" Grid.Row="1" Text="{Binding Contact.Address}"></Entry>
+            </Grid>
+
+            <!--<Grid VerticalOptions="StartAndExpand" Grid.Column="0" Grid.Row="3">
+                <Grid.ColumnDefinitions>
+                    <ColumnDefinition Width="35"  />
+                    <ColumnDefinition Width="*" />
+                </Grid.ColumnDefinitions>
+                <Grid.RowDefinitions>
+                    <RowDefinition Height="*" />
+                    <RowDefinition Height="*" />
+                </Grid.RowDefinitions>
+                <Label VerticalOptions="EndAndExpand" Grid.Row="0" Grid.Column="1"  Text="Company"></Label>
+                <svg:SvgView Grid.Column="0" Grid.Row="1" ResourceId="TouchPanel.Icons.building.svg" />
+                <Entry Margin="0,-5,0,0"  FontSize="22"  Grid.Column="1" Grid.Row="1" Text="{Binding Contact.Company}"></Entry>
+            </Grid>-->
+
+            <Grid VerticalOptions="StartAndExpand" Grid.Column="1" Grid.Row="3">
+                <Grid.ColumnDefinitions>
+                    <ColumnDefinition Width="35"  />
+                    <ColumnDefinition Width="*" />
+                </Grid.ColumnDefinitions>
+                <Grid.RowDefinitions>
+                    <RowDefinition Height="*" />
+                    <RowDefinition Height="*" />
+                </Grid.RowDefinitions>
+                <Label VerticalOptions="EndAndExpand" Grid.Row="0" Grid.Column="1"  Text="Room name"></Label>
+                <svg:SvgView Grid.Column="0" Grid.Row="1" ResourceId="TouchPanel.Icons.tag.svg" />
+                <Entry Margin="0,-5,0,0"  FontSize="22"  Grid.Column="1" Grid.Row="1" Text="{Binding Contact.RoomName}"></Entry>
+            </Grid>
+
+            <Grid VerticalOptions="EndAndExpand" Grid.Column="0" Grid.Row="3">
+                <Grid.ColumnDefinitions>
+                    <ColumnDefinition Width="35"  />
+                    <ColumnDefinition Width="*" />
+                </Grid.ColumnDefinitions>
+                <Grid.RowDefinitions>
+                    <RowDefinition Height="*" />
+                    <RowDefinition Height="*" />
+                </Grid.RowDefinitions>
+                <Label VerticalOptions="EndAndExpand" Grid.Row="0" Grid.Column="1"  Text="Name"></Label>
+                <svg:SvgView Grid.Column="0" Grid.Row="1" ResourceId="TouchPanel.Icons.user.svg" />
+                <Entry  FontSize="22"  Grid.Column="1" Grid.Row="1" Text="{Binding Contact.ContactName}"></Entry>
+            </Grid>
+
+            <!--<Grid VerticalOptions="EndAndExpand" Grid.Column="1" Grid.Row="4">
+                <Grid.ColumnDefinitions>
+                    <ColumnDefinition Width="35"  />
+                    <ColumnDefinition Width="*" />
+                </Grid.ColumnDefinitions>
+                <Grid.RowDefinitions>
+                    <RowDefinition Height="*" />
+                    <RowDefinition Height="*" />
+                </Grid.RowDefinitions>
+                <Label VerticalOptions="EndAndExpand" Grid.Row="0" Grid.Column="1"  Text="Contact list friendly name"></Label>
+                <svg:SvgView Grid.Column="0" Grid.Row="1" ResourceId="TouchPanel.Icons.user_tag.svg" />
+                <Entry  FontSize="22"  Grid.Column="1" Grid.Row="1" Text="{Binding Contact.ContactFriendlyName}"></Entry>
+            </Grid>-->
+
+            <Grid VerticalOptions="EndAndExpand" Grid.Column="0" Grid.Row="4">
+                <Grid.ColumnDefinitions>
+                    <ColumnDefinition Width="35"  />
+                    <ColumnDefinition Width="*" />
+                    <ColumnDefinition Width="35" />
+                </Grid.ColumnDefinitions>
+                <Grid.RowDefinitions>
+                    <RowDefinition Height="*" />
+                    <RowDefinition Height="*" />
+                </Grid.RowDefinitions>
+                <Label VerticalOptions="EndAndExpand" Grid.Row="0" Grid.Column="1"  Text="Assign to preset"></Label>
+                <svg:SvgView Grid.Column="0" Grid.Row="1" ResourceId="TouchPanel.Icons.sliders_h_square.svg" />
+                <Picker 
+                    WidthRequest="100"
+                    Margin="0,-5,0,0"  FontSize="22"  Grid.Column="1" Grid.Row="1" Grid.ColumnSpan="2"
+                    ItemsSource="{Binding UserPresets}"
+                    SelectedItem="{Binding Contact.Preset}" />
+                <svg:SvgView Grid.Column="2" Grid.Row="1" Margin="0,0,0,0"  WidthRequest="15" VerticalAligment="Middle" HorizontalAligment="End" ResourceId="TouchPanel.Icons.arrow-down.svg" />
+
+            </Grid>
+
+            <StackLayout Margin="0,-50" HorizontalOptions="EndAndExpand" Orientation="Horizontal" VerticalOptions="EndAndExpand" Grid.Row="5" Grid.Column="1">
+                <Button WidthRequest="120" Margin="0,20,0,30" Command="{Binding CancelCommand}" BackgroundColor="#E55E40" TextColor="WhiteSmoke" BorderWidth="1" BorderColor="LightGray" Text="Cancel"></Button>
+                <Button WidthRequest="120" Margin="10,20,30,30" Command="{Binding SubmitCommand}" BackgroundColor="DodgerBlue" TextColor="WhiteSmoke" BorderWidth="1" BorderColor="LightGray" Text="Save"></Button>
+            </StackLayout>
+
+
+        </Grid>
+    </ContentView.Content>
+</ContentView>

@@ -1,0 +1,108 @@
+﻿<?xml version="1.0" encoding="utf-8" ?>
+<ContentView xmlns="http://xamarin.com/schemas/2014/forms"
+             xmlns:x="http://schemas.microsoft.com/winfx/2009/xaml"
+             xmlns:d="http://xamarin.com/schemas/2014/forms/design"
+             xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
+             mc:Ignorable="d"        
+             xmlns:local="clr-namespace:TouchPanel.Helpers.Converters"
+             NavigationPage.HasNavigationBar="false"
+             x:Class="TouchPanel.Views.Contacts.DialingPage"
+             xmlns:svg="clr-namespace:XamaRed.Forms.Svg;assembly=XamaRed.Forms.Svg">
+
+    <ContentView.Resources>
+        <local:BooleanToButtonStatusColorConverter x:Key="BooleanToButtonStatusColorConverter"/>
+        
+    </ContentView.Resources>
+    <ContentView.Content>
+        <Grid>
+        <StackLayout Margin="50,200,50,0" Orientation="Vertical" VerticalOptions="CenterAndExpand">
+            <Label Text="{Binding CurrentStatus}"
+                FontSize="40"                   
+                TextColor="White"
+                VerticalOptions="CenterAndExpand" 
+                HorizontalOptions="CenterAndExpand" />
+            <Label Text="asdasdasdasdas"
+                Margin="0,30,0,0"
+                FontSize="40"                   
+                TextColor="White"
+                VerticalOptions="CenterAndExpand" 
+                HorizontalOptions="CenterAndExpand" />
+            <StackLayout  
+                Margin="0,-10,0,30"
+                Orientation="Horizontal"                  
+                HorizontalOptions="CenterAndExpand" >
+                <Label Text="Address:" FontSize="20" TextColor="WhiteSmoke" 
+                HorizontalOptions="CenterAndExpand" />
+                <Label Text="asdadasdas" FontSize="20" TextColor="WhiteSmoke"
+                HorizontalOptions="CenterAndExpand" />
+            </StackLayout>
+            <StackLayout Orientation="Horizontal" HorizontalOptions="CenterAndExpand" HeightRequest="58">
+                <Frame Margin="5,0,5,0" WidthRequest="220" IsVisible="{Binding IsConnected}" BorderColor="LightGray"
+                       BackgroundColor="{Binding IsMuted, Converter={StaticResource BooleanToButtonStatusColorConverter}}" >
+                    <Frame.GestureRecognizers>
+                        <TapGestureRecognizer NumberOfTapsRequired="1"
+                             Command="{Binding MuteCommand}">
+                        </TapGestureRecognizer>
+                    </Frame.GestureRecognizers>
+                    <StackLayout Orientation="Horizontal" HorizontalOptions="Center">
+                        <svg:SvgView  ResourceId="TouchPanel.Icons.micro_muted.svg" />
+                        <Label FontSize="18" Margin="-10,-1,0,0" TextColor="White" Text="{Binding MuteButtonText}"></Label>
+                    </StackLayout>
+                </Frame>
+                    <Button Margin="5,0,5,0" Command="{Binding ToggleConfirmEndCallModalCommand}" 
+                    Text="End call" TextColor="WhiteSmoke"
+                    BorderWidth="1" BorderColor="LightGray"
+                    HorizontalOptions="Center" WidthRequest="150"
+                    BackgroundColor="#E55E40"></Button>
+                <Frame Margin="5,0,5,0" WidthRequest="220"  IsVisible="{Binding IsConnected}" BorderColor="LightGray"
+                        BackgroundColor="{Binding IsPresentationStarted, Converter={StaticResource BooleanToButtonStatusColorConverter}}">
+                    <Frame.GestureRecognizers>
+                        <TapGestureRecognizer NumberOfTapsRequired="1"
+                             Command="{Binding TogglePresentationModeCommand}">
+                        </TapGestureRecognizer>
+                    </Frame.GestureRecognizers>
+                    <StackLayout Orientation="Horizontal" HorizontalOptions="Center">
+                        <svg:SvgView  ResourceId="TouchPanel.Icons.tv_select_source_white.svg" />
+                        <Label FontSize="18" Margin="-10,-1,0,0"  TextColor="White" Text="{Binding PresentationButtonText}"></Label>
+                    </StackLayout>
+                </Frame>
+            </StackLayout>
+           
+            <StackLayout    VerticalOptions="StartAndExpand"  Margin="0,40"
+                HorizontalOptions="CenterAndExpand"  Orientation="Horizontal">
+                <svg:SvgView  ResourceId="TouchPanel.Icons.volume_mute.svg" />
+                <Slider DragCompleted="Slider_DragCompleted"  Margin="0,6" Minimum="0" VerticalOptions="Start" Maximum="100" WidthRequest="200" Value="{Binding Volume}"></Slider>
+                <svg:SvgView  ResourceId="TouchPanel.Icons.volume_up.svg" />
+            </StackLayout>
+            
+        </StackLayout>
+            <AbsoluteLayout IsVisible="{Binding IsShowConfirmEndCallModal}">
+                <Frame BorderColor="LightGray"  AbsoluteLayout.LayoutBounds="400,260,450,175" BackgroundColor="#EBEBEB">
+                <Grid >
+                    <Grid.ColumnDefinitions>
+                        <ColumnDefinition Width="*" />
+                        <ColumnDefinition Width="*" />
+                    </Grid.ColumnDefinitions>
+                    <Grid.RowDefinitions>
+                        <RowDefinition Height="50" />
+                        <RowDefinition Height="75" />
+                    </Grid.RowDefinitions>
+                    <Label HorizontalTextAlignment="Center" HorizontalOptions="Center" WidthRequest="280"
+                           Grid.ColumnSpan="2"
+                           FontSize="16" TextColor="Black"
+                           Text="You are about end this call, are you sure you want to continue?"></Label>
+                    <Button VerticalOptions="End" Grid.Row="1" TextColor="WhiteSmoke" Text="Continue call"
+                        Command="{Binding ToggleConfirmEndCallModalCommand}"
+                        BorderWidth="1" BorderColor="LightGray"
+                        HorizontalOptions="Center" WidthRequest="150"
+                        BackgroundColor="Gray"></Button>
+                        <Button VerticalOptions="End" Grid.Row="1" Grid.Column="1" Command="{Binding EndCallCommand}"  TextColor="WhiteSmoke" Text="End call"
+                    BorderWidth="1" BorderColor="LightGray"
+                    HorizontalOptions="Center" WidthRequest="150"
+                    BackgroundColor="#E55E40"></Button>
+                </Grid>
+                </Frame>
+            </AbsoluteLayout>
+        </Grid>
+    </ContentView.Content>
+</ContentView>

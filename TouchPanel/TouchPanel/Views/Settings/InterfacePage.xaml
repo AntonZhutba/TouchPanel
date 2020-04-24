@@ -1,0 +1,126 @@
+﻿<?xml version="1.0" encoding="utf-8" ?>
+<ContentView xmlns="http://xamarin.com/schemas/2014/forms"
+             xmlns:x="http://schemas.microsoft.com/winfx/2009/xaml"
+             xmlns:d="http://xamarin.com/schemas/2014/forms/design"
+             xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
+             mc:Ignorable="d"
+             xmlns:svg="clr-namespace:XamaRed.Forms.Svg;assembly=XamaRed.Forms.Svg"
+             BackgroundColor="White"
+             x:Class="TouchPanel.Views.Settings.InterfacePage">
+    <ContentView.Content>
+        <Grid Margin="20,20,20,0">
+            <Grid.ColumnDefinitions>
+                <ColumnDefinition Width="*" />
+                <ColumnDefinition Width="*" />
+            </Grid.ColumnDefinitions>
+            <Grid.RowDefinitions>
+                <RowDefinition Height="110" />
+                <RowDefinition Height="40" />
+                <RowDefinition Height="*" />
+                <RowDefinition Height="*" />
+            </Grid.RowDefinitions>
+
+            <Grid VerticalOptions="StartAndExpand" Grid.Column="0" Grid.Row="0">
+                <Grid.ColumnDefinitions>
+                    <ColumnDefinition Width="35"  />
+                    <ColumnDefinition Width="*" />
+                </Grid.ColumnDefinitions>
+                <Grid.RowDefinitions>
+                    <RowDefinition Height="*" />
+                    <RowDefinition Height="*" />
+                </Grid.RowDefinitions>
+                <Label VerticalOptions="EndAndExpand" Grid.Row="0" Grid.Column="1"  Text="Name of panel"></Label>
+                <svg:SvgView Grid.Column="0" Grid.Row="1" ResourceId="TouchPanel.Icons.info_square.svg" />
+                <Entry Margin="0,-15,0,0"  FontSize="22"  Grid.Column="1" Grid.Row="1" Text="{Binding InterfaceSettings.PanelName}"></Entry>
+            </Grid>
+
+            <Grid VerticalOptions="StartAndExpand" Grid.Column="1" Grid.Row="0">
+                <Grid.ColumnDefinitions>
+                    <ColumnDefinition Width="35"  />
+                    <ColumnDefinition Width="*" />
+                </Grid.ColumnDefinitions>
+                <Grid.RowDefinitions>
+                    <RowDefinition Height="*" />
+                    <RowDefinition Height="*" />
+                </Grid.RowDefinitions>
+                <Label VerticalOptions="EndAndExpand" Grid.Row="0" Grid.Column="1"  Text="Location"></Label>
+                <svg:SvgView Grid.Column="0" Grid.Row="1" ResourceId="TouchPanel.Icons.location_circle.svg" />
+                <Entry  Margin="0,-15,0,0"  FontSize="22"  Grid.Column="1" Grid.Row="1" Text="{Binding InterfaceSettings.Location}"></Entry>
+            </Grid>
+          
+            <Entry IsEnabled="False" Grid.Column="0" Grid.ColumnSpan="2" Grid.Row="1" HorizontalOptions="FillAndExpand" HeightRequest="1" Placeholder="Interface options" IsReadOnly="True"/>
+            <Grid Margin="20,0,0,0" Grid.Row="2" Grid.ColumnSpan="2">
+                <Grid.ColumnDefinitions>
+                    <ColumnDefinition Width="*" />
+                    <ColumnDefinition Width="*" />
+                    <ColumnDefinition Width="*" />
+                </Grid.ColumnDefinitions>
+                <Grid.RowDefinitions>
+                    <RowDefinition Height="65" />
+                    <RowDefinition Height="65" />
+                    <RowDefinition Height="65" />
+                    <RowDefinition Height="65" />
+                </Grid.RowDefinitions>
+                
+                <StackLayout Grid.Row="0" Grid.Column="0" Orientation="Horizontal" VerticalOptions="Center" >
+                    <CheckBox Scale="1.2" Color="Black" BackgroundColor="White" IsChecked="{Binding InterfaceSettings.IsSafeMode }"  />
+                    <Label FontSize="18" Margin="0,2" Text="Set panel in Safe mode"></Label>
+                </StackLayout>
+
+                <StackLayout Grid.Row="1" Grid.Column="0" Orientation="Horizontal" VerticalOptions="Center" >
+                    <CheckBox Scale="1.2" Color="Black" BackgroundColor="White" IsChecked="{Binding InterfaceSettings.IsPinRequiredToSelectSource }"  />
+                    <Label FontSize="18" Margin="0,2" Text="Require pin to select source"></Label>
+                </StackLayout>
+
+                <StackLayout Grid.Row="2" Grid.Column="0" Orientation="Horizontal" VerticalOptions="Center" >
+                    <CheckBox Scale="1.2" Color="Black" BackgroundColor="White" IsChecked="{Binding InterfaceSettings.IsShutdownAllowed }"  />
+                    <Label FontSize="18" Margin="0,2" Text="Allow users to shutdown panel"></Label>
+                </StackLayout>
+
+                <StackLayout Grid.Row="3" Grid.Column="0" Orientation="Horizontal" VerticalOptions="Center" >
+                    <CheckBox Scale="1.2" Color="Black" BackgroundColor="White" IsChecked="{Binding InterfaceSettings.IsRestartAllowed }"  />
+                    <Label FontSize="18" Margin="0,2" Text="Allow users to restart panel"></Label>
+                </StackLayout>
+
+                <StackLayout Grid.Row="0" Grid.Column="1" Orientation="Horizontal" VerticalOptions="Center" >
+                    <CheckBox Scale="1.2" Color="Black" BackgroundColor="White" IsChecked="{Binding InterfaceSettings.IsChangingServerSettingsAllowed }"  />
+                    <Label FontSize="18" Margin="0,2" Text="Allow users to change server settings"></Label>
+                </StackLayout>
+
+                <StackLayout Grid.Row="1" Grid.Column="1" Orientation="Horizontal" VerticalOptions="Center" >
+                    <CheckBox Scale="1.2" Color="Black" BackgroundColor="White" IsChecked="{Binding InterfaceSettings.IsConnectToDeskView }"  />
+                    <Label FontSize="18" Margin="0,2" Text="Connect to DESKVIEW™"></Label>
+                </StackLayout>
+
+                <StackLayout Grid.Row="2" Grid.Column="1" Orientation="Horizontal" VerticalOptions="Center" >
+                    <CheckBox Scale="1.2" Color="Black" BackgroundColor="White" IsChecked="{Binding InterfaceSettings.IsKeepPannelAfterPowerLoss }"  />
+                    <Label FontSize="18" Margin="0,2" Text="Keep panel awake"></Label>
+                </StackLayout>
+
+                <StackLayout Grid.Row="3" Grid.Column="1" Orientation="Horizontal" VerticalOptions="Center" >
+                    <CheckBox Scale="1.2" Color="Black" BackgroundColor="White" IsChecked="{Binding InterfaceSettings.IsRememberLastUser }"  />
+                    <Label FontSize="18" Margin="0,2" Text="Keep panel off after power loss"></Label>
+                </StackLayout>
+
+                <StackLayout Grid.Row="0" Grid.Column="2" Orientation="Horizontal" VerticalOptions="Center" >
+                    <CheckBox Scale="1.2" Color="Black" BackgroundColor="White" IsChecked="{Binding InterfaceSettings.IsRememnerLastCalls }"  />
+                    <Label FontSize="18" Margin="0,2" Text="Remember last user"></Label>
+                </StackLayout>
+
+                <StackLayout Grid.Row="1" Grid.Column="2" Orientation="Horizontal" VerticalOptions="Center" >
+                    <CheckBox Scale="1.2" Color="Black" BackgroundColor="White" IsChecked="{Binding InterfaceSettings.IsSafeMode }"  />
+                    <Label FontSize="18" Margin="0,2" Text="Remember last calls"></Label>
+                </StackLayout>
+            </Grid>
+
+            <StackLayout  HorizontalOptions="EndAndExpand" Orientation="Horizontal" VerticalOptions="EndAndExpand" Grid.Row="3" Grid.Column="1">
+                <Button WidthRequest="120" Margin="0,20,0,31" BackgroundColor="#E55E40" 
+                        Command="{Binding CancelCommand}"
+                        TextColor="WhiteSmoke" BorderWidth="1" BorderColor="LightGray" Text="Cancel"></Button>
+                <Button WidthRequest="120" Margin="10,20,30,31" BackgroundColor="DodgerBlue" 
+                        Command="{Binding SaveCommand}"
+                        TextColor="WhiteSmoke" BorderWidth="1" BorderColor="LightGray" Text="Save"></Button>
+            </StackLayout>
+        </Grid>
+    </ContentView.Content>
+</ContentView>

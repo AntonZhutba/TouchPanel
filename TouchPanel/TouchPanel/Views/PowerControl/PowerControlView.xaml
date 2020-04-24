@@ -1,0 +1,70 @@
+﻿<?xml version="1.0" encoding="UTF-8"?>
+<ContentView xmlns="http://xamarin.com/schemas/2014/forms" 
+             xmlns:x="http://schemas.microsoft.com/winfx/2009/xaml"
+             xmlns:d="http://xamarin.com/schemas/2014/forms/design"
+             xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
+             mc:Ignorable="d"
+             xmlns:svg="clr-namespace:XamaRed.Forms.Svg;assembly=XamaRed.Forms.Svg"
+              NavigationPage.HasNavigationBar="false"
+             x:Class="TouchPanel.Views.Power.PowerControlView">
+    <ContentView.Content>
+        <Grid>
+            <Frame BackgroundColor="#6AAAD3" Opacity="0.8"></Frame>
+            <Frame BackgroundColor="Transparent">
+                <Grid >
+                    <Grid.ColumnDefinitions>
+                        <ColumnDefinition Width="200"  />
+                        <ColumnDefinition Width="200" />
+                        <ColumnDefinition Width="200" />
+
+                    </Grid.ColumnDefinitions>
+                    <Grid.RowDefinitions>
+                        <RowDefinition Height="*" />
+                        <RowDefinition Height="*" />
+                    </Grid.RowDefinitions>
+
+                    <Label Grid.ColumnSpan="3" FontSize="22" Text="Select power options"></Label>
+
+                    <Frame Margin="10,0" BackgroundColor="#91C2E0" Grid.Row="1" Grid.Column="0">
+                        <Frame.GestureRecognizers>
+                            <TapGestureRecognizer NumberOfTapsRequired="1"
+                            Command="{Binding SleepCommand}">
+                            </TapGestureRecognizer>
+                        </Frame.GestureRecognizers>
+                        <StackLayout Orientation="Horizontal" HorizontalOptions="CenterAndExpand" >
+                            <svg:SvgView HeightRequest="20" WidthRequest="25" HorizontalAligment="Middle" VerticalAligment="Middle" ResourceId="TouchPanel.Icons.moon_stars_white.svg" />
+                            <Label FontSize="20" TextColor="White" Text="Sleep"></Label>
+                        </StackLayout>
+                    </Frame>
+
+                    <Frame Margin="10,0" BackgroundColor="#91C2E0" Grid.Row="1" Grid.Column="1">
+                        <Frame.GestureRecognizers>
+                            <TapGestureRecognizer NumberOfTapsRequired="1"
+                            Command="{Binding RestartCommand}">
+                            </TapGestureRecognizer>
+                        </Frame.GestureRecognizers>
+                        <StackLayout Orientation="Horizontal" HorizontalOptions="CenterAndExpand" >
+                            <svg:SvgView HeightRequest="20" WidthRequest="25" HorizontalAligment="Middle" VerticalAligment="Middle" ResourceId="TouchPanel.Icons.undo_white.svg" />
+                            <Label FontSize="20" TextColor="White" Text="Restart"></Label>
+                        </StackLayout>
+                    </Frame>
+
+                    <Frame Margin="10,0" BackgroundColor="#91C2E0" Grid.Row="1" Grid.Column="2">
+                        <Frame.GestureRecognizers>
+                            <TapGestureRecognizer NumberOfTapsRequired="1"
+                            Command="{Binding ShutdownCommand}">
+                            </TapGestureRecognizer>
+                        </Frame.GestureRecognizers>
+                        <StackLayout Opacity="1" Orientation="Horizontal" HorizontalOptions="CenterAndExpand" >
+                            <svg:SvgView HeightRequest="20" WidthRequest="25" HorizontalAligment="Middle" VerticalAligment="Middle" ResourceId="TouchPanel.Icons.power_off_white.svg" />
+                            <Label FontSize="20" TextColor="White" Text="Shutdown"></Label>
+                        </StackLayout>
+                    </Frame>
+
+
+
+                </Grid>
+            </Frame>
+        </Grid>
+    </ContentView.Content>
+</ContentView>

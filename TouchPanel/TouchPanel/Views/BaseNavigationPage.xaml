@@ -1,0 +1,34 @@
+﻿<?xml version="1.0" encoding="utf-8" ?>
+<ContentPage xmlns="http://xamarin.com/schemas/2014/forms"
+             xmlns:x="http://schemas.microsoft.com/winfx/2009/xaml"
+             xmlns:d="http://xamarin.com/schemas/2014/forms/design"
+             xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
+             mc:Ignorable="d" 
+             BackgroundImage="Background_Blue.jpg"
+             xmlns:svg="clr-namespace:XamaRed.Forms.Svg;assembly=XamaRed.Forms.Svg"
+             x:Class="TouchPanel.Views.BaseNavigationPage">
+    <ContentPage.Content>
+        <Grid>
+            <Grid.RowDefinitions>
+                <RowDefinition Height="40" />
+                <RowDefinition Height="*" />
+                <RowDefinition Height="40" />
+            </Grid.RowDefinitions>
+
+            <Label Grid.Row="0" Margin="30,10,0,0" AbsoluteLayout.LayoutBounds="10,10,300,40" FontSize="32" TextColor="White" Text="{Binding ApplicationConfiguration.DeskViewSettings.PanelName, Mode=TwoWay}" />
+            <ContentView Grid.Row="1" x:Name="contentView"></ContentView>
+            <StackLayout Grid.Row="2" VerticalOptions="EndAndExpand" 
+                         Margin="15,0,0,10" x:Name="backButton" 
+                         Orientation="Horizontal" AbsoluteLayout.LayoutBounds="10,500,300,50">
+                <StackLayout.GestureRecognizers>
+                    <TapGestureRecognizer NumberOfTapsRequired="1"
+                            Command="{Binding GoBackCommand}">
+                    </TapGestureRecognizer>
+                </StackLayout.GestureRecognizers>
+                <svg:SvgView ResourceId="TouchPanel.Icons.arrow_circle_white.svg" />
+                <Label Text="BACK" FontSize="22" TextColor="White"></Label>
+            </StackLayout>
+           
+        </Grid>
+    </ContentPage.Content>
+</ContentPage>

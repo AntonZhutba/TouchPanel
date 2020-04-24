@@ -1,0 +1,123 @@
+﻿<?xml version="1.0" encoding="utf-8" ?>
+<ContentView xmlns="http://xamarin.com/schemas/2014/forms"
+             xmlns:x="http://schemas.microsoft.com/winfx/2009/xaml"
+             xmlns:d="http://xamarin.com/schemas/2014/forms/design"
+             xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
+             mc:Ignorable="d"             
+             xmlns:local="clr-namespace:TouchPanel.Views.Source"
+            xmlns:converters="clr-namespace:TouchPanel.Helpers.Converters"
+             NavigationPage.HasNavigationBar="false"
+             x:Name="Root"
+             x:Class="TouchPanel.Views.Source.SourceListPage">
+    <ContentView.Resources>
+        <Style TargetType="Frame" Class="Room">
+            <Setter Property="BackgroundColor"
+                    Value="Transparent" />
+            <Setter Property="HorizontalOptions"
+                    Value="CenterAndExpand" />
+            <Setter Property="BorderColor"
+                    Value="White" />
+        </Style>
+        <converters:SourceToLayoutBondsConverter x:Key="SourceToLayoutBondsConverter"/>
+        <converters:InverseBoolConverter x:Key="InverseBoolConverter"/>
+    </ContentView.Resources>
+   
+    <ContentView.Content >
+
+        <Grid VerticalOptions="StartAndExpand">
+            <Grid.GestureRecognizers>
+                <TapGestureRecognizer NumberOfTapsRequired="1"
+                                    Command="{Binding CloseAllMenusCommand}">
+                </TapGestureRecognizer>
+            </Grid.GestureRecognizers>
+            <CollectionView x:Name="collection1" IsTabStop="False" ItemsSource="{Binding Sources}" Margin="50,0,50,0">
+                <CollectionView.ItemsLayout >
+                    <GridItemsLayout Orientation="Vertical" Span="4"></GridItemsLayout>
+                </CollectionView.ItemsLayout>
+
+                <CollectionView.ItemTemplate>
+                    <DataTemplate>
+      
+                        <Grid Margin="0,-10,0,0" Padding="0">
+                            
+                            <Grid.RowDefinitions>
+                                <RowDefinition Height="28" />
+                                <RowDefinition Height="60" />
+                                <RowDefinition Height="55" />
+                                <RowDefinition Height="10" />
+                                <RowDefinition Height="40" />
+
+                            </Grid.RowDefinitions>
+
+                            <Label Grid.Row="0" HorizontalOptions="Center" FontSize="20" TextColor="White" Text="{Binding Name}"></Label>
+                            <Frame Margin="35,0,35,0" Grid.Row="1" Grid.RowSpan="2" StyleClass="Window" Padding="5" BorderColor="White" >
+                                <Frame.GestureRecognizers>
+                                    <TapGestureRecognizer NumberOfTapsRequired="1"
+                                    Command="{Binding BindingContext.OpenContextMenuCommand, Source={x:Reference Root}} "
+                                    CommandParameter="{Binding .}">
+                                    </TapGestureRecognizer>
+                                </Frame.GestureRecognizers>
+                                <Image Source="black_background.jpg">
+
+                                </Image>
+
+                            </Frame>
+                            <BoxView Grid.Row="3" Margin="50,4,50,0" CornerRadius="30" BackgroundColor="White" HeightRequest="5">
+                            </BoxView>
+
+                        </Grid>
+
+
+                    </DataTemplate>
+                </CollectionView.ItemTemplate>
+            </CollectionView>
+            
+            <AbsoluteLayout HorizontalOptions="Fill" IsVisible="{Binding IsShowingSelectRoomModal}" >
+                <AbsoluteLayout.GestureRecognizers>
+                    <TapGestureRecognizer NumberOfTapsRequired="1"
+                             Command="{Binding CloseSelectRoomMenuCommand}">
+                    </TapGestureRecognizer>
+                </AbsoluteLayout.GestureRecognizers>
+                <Frame AbsoluteLayout.LayoutBounds="{Binding CurrentSelectedSource, Converter={StaticResource SourceToLayoutBondsConverter}}"  Padding="1"  BorderColor="LightGray">
+                 
+                    <ListView                                
+                        BackgroundColor="White" SelectionMode="None" HasUnevenRows="True"
+                        SeparatorVisibility="Default" ItemsSource="{Binding Rooms}" >
+                    <ListView.ItemTemplate>
+                        <DataTemplate>
+                            <ViewCell >
+                                <StackLayout Padding="5" Margin="0,5,0,5" HorizontalOptions="StartAndExpand" Orientation="Horizontal">
+                                    <StackLayout.GestureRecognizers>
+                                        <TapGestureRecognizer NumberOfTapsRequired="1"
+                                                                 CommandParameter="{Binding .}"
+                                                                 Command="{Binding BindingContext.SelectRoomForSourceCommand,  Source={x:Reference Root}}">
+                                        </TapGestureRecognizer>
+                                    </StackLayout.GestureRecognizers>
+                                    <StackLayout Orientation="Vertical">
+                                        <Frame StyleClass="Window" HeightRequest="20" WidthRequest="20" Padding="5" BorderColor="Black" >
+
+                                        </Frame>
+                                        <BoxView  CornerRadius="30" Margin="0,-2,0,5" BackgroundColor="Black" HeightRequest="2"></BoxView>
+                                    </StackLayout>
+                                    <StackLayout Orientation="Vertical">
+                                        <Label FontSize="14" TextColor="Black" Text="{Binding Name}"></Label>
+                                        <Label FontSize="12" TextColor="Gray" Text="{Binding Location}"></Label>
+                                    </StackLayout>
+
+                                </StackLayout>
+                            </ViewCell>
+                        </DataTemplate>
+                    </ListView.ItemTemplate>
+                </ListView>
+                </Frame>
+            </AbsoluteLayout>
+
+            <local:PresetListView HorizontalOptions="EndAndExpand">
+                <x:Arguments>
+                    <x:Boolean>true</x:Boolean>
+                </x:Arguments>
+            </local:PresetListView>
+        </Grid>
+
+    </ContentView.Content>
+</ContentView>
